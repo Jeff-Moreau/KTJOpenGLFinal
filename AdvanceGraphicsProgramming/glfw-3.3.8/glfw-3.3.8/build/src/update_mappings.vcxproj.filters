@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\SchoolFiles\Advanced Graphics Programming\glfw-3.3.8\glfw-3.3.8\build\CMakeFiles\6a880b2846ebbb23b745003c1671f7ce\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\SchoolFiles\Advanced Graphics Programming\glfw-3.3.8\glfw-3.3.8\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\SchoolFiles\Advanced Graphics Programming\glfw-3.3.8\glfw-3.3.8\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\SchoolFiles\Advanced Graphics Programming\glfw-3.3.8\glfw-3.3.8\CMake\GenerateMappings.cmake" />
+    <None Include="C:\SchoolFiles\Advanced Graphics Programming\glfw-3.3.8\glfw-3.3.8\build\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1411A7F9-CF31-3CE1-A054-4857BD4F7A31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C9790B06-685A-3642-9FC3-81CF756BAAD9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

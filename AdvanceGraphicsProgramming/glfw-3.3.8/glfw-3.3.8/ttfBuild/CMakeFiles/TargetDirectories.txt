@@ -1,0 +1,5 @@
+C:/SchoolFiles/Advanced Graphics Programming/glfw-3.3.8/glfw-3.3.8/ttfBuild/CMakeFiles/freetype.dir
+C:/SchoolFiles/Advanced Graphics Programming/glfw-3.3.8/glfw-3.3.8/ttfBuild/CMakeFiles/PACKAGE.dir
+C:/SchoolFiles/Advanced Graphics Programming/glfw-3.3.8/glfw-3.3.8/ttfBuild/CMakeFiles/INSTALL.dir
+C:/SchoolFiles/Advanced Graphics Programming/glfw-3.3.8/glfw-3.3.8/ttfBuild/CMakeFiles/ALL_BUILD.dir
+C:/SchoolFiles/Advanced Graphics Programming/glfw-3.3.8/glfw-3.3.8/ttfBuild/CMakeFiles/ZERO_CHECK.dir
