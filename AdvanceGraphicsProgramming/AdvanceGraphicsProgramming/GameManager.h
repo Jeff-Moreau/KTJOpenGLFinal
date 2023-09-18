@@ -9,27 +9,31 @@
 
 class GameManager
 {
-private:
+private: // SINGLETON
 	static GameManager* sInstance;
 
+private: // POINTER VARIABLES
 	GraphicsManager* pGraphics;
 	ScreenManager* pScreenManager;
-	Camera camera;
 
+private: // VARIABLES
+	Camera camera;
 	glm::vec3 cameraPos;
 	glm::vec3 cameraFront;
 	glm::vec3 cameraUp;
 
-public:
+public: // SINGLETON
 	static GameManager* Instance();
-	static void Release();
 
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	GameManager();
+	~GameManager();
+
+public: // DOERS
 	void Run();
 	void Update();
 	void LateUpdate();
 	void Render();
-
-	GameManager();
-	~GameManager();
+	static void Release();
 };
 #endif // !GAMEMANAGER_H

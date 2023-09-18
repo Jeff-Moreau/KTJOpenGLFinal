@@ -11,25 +11,28 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include "Shader.h"
 
-struct Character {
-	unsigned int TextureID;	// ID handle of the glyph texture
+struct Character
+{
+	unsigned int ID;		// ID handle of the glyph texture
 	glm::ivec2 Size;		// Size of glyph
 	glm::ivec2 Bearing;		// Offset from baseline to left/top of glyph
-	unsigned int Advance;	// Offset to advance to next glyph
+	unsigned int Offset;	// Offset to advance to next glyph
 };
 
 class Font
 {
-private:
-	std::map<char, Character> characters;
+private: // CONTAINER
+	std::map<char, Character> _CharacterList;
+
+private: // VARIABLES
 	unsigned int VAO, VBO;
-	Shader shader;
+	Shader _FontShader;
 
-public:
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
-	Font(std::string filename, Shader& aShader);
+	Font(std::string fontName, Shader& shaderToUse);
 
+public: // DOERS
 	void RenderText(std::string text, float x, float y, float scale, glm::vec3 color);
 };
-#endif
-
+#endif // !FONT_H

@@ -38,8 +38,8 @@ GraphicsManager::GraphicsManager() {
 
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
-	//glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
+	//glEnable(GL_DEPTH_TEST); // Text showing issues were right here may be a problem
+	//glEnable(GL_CULL_FACE); // same text issues here
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 	glEnable(GL_BLEND);
