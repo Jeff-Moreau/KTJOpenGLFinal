@@ -15,14 +15,17 @@ _Vertices
 	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
 }
 {
+	// MEMBER VARIABLE INSTANTIATION
 	_Shader = shaderToUse;
 	
 	GLSettings();
 
+	// LOCAL VARIABLE DECLARATIONS
 	int width;
 	int height;
 	int textureColorChannels;
 	unsigned char* newTexture = nullptr;
+
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
 
 	// Texture error check
@@ -57,14 +60,17 @@ Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, flo
 	x, y, 0.0f,			1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
 }
 {
+	// MEMBER VARIABLE INSTANTIATION
 	_Shader = shaderToUse;
 
 	GLSettings();
 
+	// LOCAL VARIABLE DECLARATIONS
 	int width;
 	int height;
 	int colorChannels;
 	unsigned char* newTexture = nullptr;
+
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &colorChannels, 0);
 
 	// Texture error check

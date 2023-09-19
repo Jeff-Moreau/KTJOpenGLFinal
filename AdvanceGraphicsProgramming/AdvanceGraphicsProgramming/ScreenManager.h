@@ -6,17 +6,17 @@
 
 class ScreenManager
 {
-public: // GLOBAL VARIABLES
+public: // GLOBAL VARIABLE DECLARATIONS
 	enum Screens
 	{
 		Start,
 		Play
 	};
 
-private: // LOCAL CONTAINERS
+private: // MEMBER CONTAINER DECLARATIONS
 	std::vector<Screen*> p_Screens;
 
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
 	Screens _CurrentScreen; // <-- used to determine which screens needs to be render and updating
 
 private: // SINGLETON

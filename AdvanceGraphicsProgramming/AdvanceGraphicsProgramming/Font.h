@@ -24,10 +24,10 @@ struct Character
 
 class Font
 {
-private: // LOCAL CONTAINERS
+private: // MEMBER CONTAINER DECLARATIONS
 	std::map<char, Character> _CharacterList;
 
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
 	float _XPos;
 	float _YPos;
 	unsigned int _VAO, _VBO;

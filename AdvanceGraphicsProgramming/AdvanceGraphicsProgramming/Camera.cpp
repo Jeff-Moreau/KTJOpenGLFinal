@@ -2,19 +2,23 @@
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : _Front(glm::vec3(0.0f, 0.0f, -1.0f)), _MovementSpeed(SPEED), _MouseSensitivity(SENSITIVITY), _Zoom(ZOOM)
 {
+    // MEMBER VARIABLE INSTANTIATION
     _Position = position;
     _WorldUp = up;
     _Yaw = yaw;
     _Pitch = pitch;
+
     UpdateCameraVectors();
 }
 
 Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : _Front(glm::vec3(0.0f, 0.0f, -1.0f)), _MovementSpeed(SPEED), _MouseSensitivity(SENSITIVITY), _Zoom(ZOOM)
 {
+    // MEMBER VARIABLE INSTANTIATION
     _Position = glm::vec3(posX, posY, posZ);
     _WorldUp = glm::vec3(upX, upY, upZ);
     _Yaw = yaw;
     _Pitch = pitch;
+
     UpdateCameraVectors();
 }
 
@@ -30,6 +34,7 @@ float Camera::GetZoom()
 
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
+    // LOCAL VARIABLE DECLARATIONS
     float velocity = _MovementSpeed * deltaTime;
 
     if (direction == FORWARD)
@@ -97,7 +102,9 @@ void Camera::ProcessMouseScroll(float yoffset)
 void Camera::UpdateCameraVectors()
 {
     // calculate the new Front vector
+    // LOCAL VARIABLE DECLARATIONS
     glm::vec3 front;
+
     front.x = cos(glm::radians(_Yaw)) * cos(glm::radians(_Pitch));
     front.y = sin(glm::radians(_Pitch));
     front.z = sin(glm::radians(_Yaw)) * cos(glm::radians(_Pitch));

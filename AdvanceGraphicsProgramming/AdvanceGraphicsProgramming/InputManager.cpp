@@ -18,8 +18,10 @@ namespace SDLFramework
 
 	InputManager::InputManager()
 	{
+		// MEMBER VARIABLE POINTER INSTANTIATION
 		p_CurrentKeyPressed = SDL_GetKeyboardState(&_KeyPressed);
 		p_PreviousKeyPressed = new Uint8[_KeyPressed];
+
 		memcpy(p_PreviousKeyPressed, p_CurrentKeyPressed, _KeyPressed);
 	}
 
@@ -46,6 +48,7 @@ namespace SDLFramework
 
 	bool InputManager::GetMouseButtonDown(MouseButton button)
 	{
+		// LOCAL VARIABLE DECLARATIONS
 		Uint32 mask = 0;
 
 		switch (button)
@@ -75,6 +78,7 @@ namespace SDLFramework
 
 	bool InputManager::GetMouseButtonPressed(MouseButton button)
 	{
+		// LOCAL VARIABLE DECLARATIONS
 		Uint32 mask = 0;
 
 		switch (button)
@@ -104,6 +108,7 @@ namespace SDLFramework
 
 	bool InputManager::GetMouseButtonReleased(MouseButton button)
 	{
+		// LOCAL VARIABLE DECLARATIONS
 		Uint32 mask = 0;
 
 		switch (button)

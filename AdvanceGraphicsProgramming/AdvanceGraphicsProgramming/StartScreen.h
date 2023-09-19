@@ -11,12 +11,13 @@ using namespace SDLFramework;
 
 class StartScreen : public Screen
 {
-private: // LOCAL POINTER VARIABLES
+private: // MEMBER POINTER VARIABLE DECLARATIONS
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
 	Font* p_MenuFont;
 
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
+	glm::vec3 _ExitColor;
 	Shader _Shader;
 	Shader _FontShader;
 

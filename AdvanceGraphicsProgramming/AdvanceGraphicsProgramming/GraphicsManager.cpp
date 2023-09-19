@@ -21,6 +21,7 @@ GraphicsManager::GraphicsManager()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+	// MEMBER VARIABLE INSTANTIATION
 	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jarjar Drinks - Ken, Tammy, Jeff", nullptr, nullptr);
 
 	if (p_GameWindow == nullptr)

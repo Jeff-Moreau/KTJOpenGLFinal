@@ -7,7 +7,7 @@
 
 class Sprite
 {
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
 	unsigned int _Texture;
 	unsigned int _VBO;
 	unsigned int _VAO;
@@ -18,7 +18,7 @@ private: // LOCAL VARIABLES
 	float _Height;
 	Shader _Shader;
 
-private: // LOCAL CONTAINERS
+private: // MEMBER CONTAINER DECLARATIONS
 	float _Vertices[32];
 	unsigned int _Indices[6] = {
 								0, 1, 3,	//first triangle

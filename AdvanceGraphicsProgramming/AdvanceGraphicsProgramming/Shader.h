@@ -11,7 +11,7 @@
 
 class Shader
 {
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
 	unsigned int _ID;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS

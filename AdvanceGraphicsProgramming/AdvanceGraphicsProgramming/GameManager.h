@@ -9,11 +9,11 @@
 
 class GameManager
 {
-private: // LOCAL POINTER VARIABLES
+private: // MEMBER POINTER VARIABLE DECLARATIONS
 	GraphicsManager* p_GraphicsManager;
 	ScreenManager* p_ScreenManager;
 
-private: // LOCAL VARIABLES
+private: // MEMBER VARIABLE DECLARATIONS
 	Camera _Camera;
 	glm::vec3 _CameraPos;
 	glm::vec3 _CameraFront;

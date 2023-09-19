@@ -9,7 +9,7 @@ namespace SDLFramework
 {
 	class InputManager
 	{
-	public: // GLOBAL VARIABLES
+	public: // GLOBAL VARIABLE DECLARATIONS
 		enum MouseButton
 		{
 			Left = 0,
@@ -19,11 +19,11 @@ namespace SDLFramework
 			Forward
 		};
 
-	private: // LOCAL POINTER VARIABLES
+	private: // MEMBER POINTER VARIABLE DECLARATIONS
 		const Uint8* p_CurrentKeyPressed;
 		Uint8* p_PreviousKeyPressed;
 
-	private: // LOCAL VARIABLES
+	private: // MEMBER VARIABLE DECLARATIONS
 		Uint32 _CurrentMouseKeyPressed;
 		Uint32 _PreviousMouseKeyPressed;
 		int _KeyPressed;

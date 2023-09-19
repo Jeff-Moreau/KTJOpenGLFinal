@@ -16,6 +16,7 @@ ScreenManager* ScreenManager::Instance()
 
 ScreenManager::ScreenManager()
 {
+	// MEMBER VARIABLE AND CONTAINERS INSTANTIATION
 	p_Screens.push_back(new StartScreen());
 	_CurrentScreen = Start;
 }

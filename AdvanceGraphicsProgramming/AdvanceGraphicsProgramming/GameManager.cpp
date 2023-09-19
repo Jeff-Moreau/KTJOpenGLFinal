@@ -17,6 +17,8 @@ GameManager* GameManager::Instance()
 GameManager::GameManager()
 {
 	stbi_set_flip_vertically_on_load(true);
+
+	// MEMBER POINTER VARIABLE INSTANTIATION
 	p_GraphicsManager = GraphicsManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));

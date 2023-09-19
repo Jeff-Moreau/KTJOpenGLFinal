@@ -3,6 +3,7 @@
 
 StartScreen::StartScreen()
 {
+	// MEMBER VARIABLE AND POINTERS INSTANTIATION
 	p_Inputs = InputManager::Instance();
 
 	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
@@ -23,15 +24,20 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
-	/*if (p_Inputs->GetMousePosition() == p_MenuFont->GetFontPosition())
+	std::cout << p_Inputs->GetMousePosition().x << std::endl;
+	if ((p_Inputs->GetMousePosition().x >= p_MenuFont->GetFontPosition().x))
 	{
-
-	}*/
+		_ExitColor = glm::vec3(0, 0, 0);
+	}
+	else
+	{
+		_ExitColor = glm::vec3(255, 255, 255);
+	}
 }
 
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
 	p_MenuFont->RenderText("Start New Game", 285, 275, 0.5f, glm::vec3(255,255,255));
-	p_MenuFont->RenderText("Exit Game", 575, 25, 0.75f, glm::vec3(0, 0, 0));
+	p_MenuFont->RenderText("Exit Game", 575, 25, 0.75f, _ExitColor);
 }

@@ -8,6 +8,7 @@ Shader::Shader()
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
     // retrieve the vertex/fragment source code from the filePath
+    // LOCAL VARIABLE DECLARATIONS
     std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vertexShader;
@@ -41,12 +42,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESULLY_READ" << streamError.what() << std::endl;
     }
 
+    // LOCAL VARIABLE DECLARATIONS
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
-
     unsigned int vertex;
     unsigned int fragment;
-
     int success;
     char infoLog[512];
 
