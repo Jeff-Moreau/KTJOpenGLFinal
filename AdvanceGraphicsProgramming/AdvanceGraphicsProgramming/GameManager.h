@@ -1,5 +1,5 @@
-#ifndef GAMEMANAGER_H
-#define GAMEMANAGER_H
+#ifndef GAME_MANAGER_H
+#define GAME_MANAGER_H
 
 #include "GraphicsManager.h"
 #include "ScreenManager.h"
@@ -10,17 +10,17 @@
 class GameManager
 {
 private: // SINGLETON
-	static GameManager* sInstance;
+	static GameManager* p_ThisInstance;
 
 private: // POINTER VARIABLES
-	GraphicsManager* pGraphics;
-	ScreenManager* pScreenManager;
+	GraphicsManager* p_GraphicsManager;
+	ScreenManager* p_ScreenManager;
 
 private: // VARIABLES
-	Camera camera;
-	glm::vec3 cameraPos;
-	glm::vec3 cameraFront;
-	glm::vec3 cameraUp;
+	Camera _Camera;
+	glm::vec3 _CameraPos;
+	glm::vec3 _CameraFront;
+	glm::vec3 _CameraUp;
 
 public: // SINGLETON
 	static GameManager* Instance();
@@ -36,4 +36,4 @@ public: // DOERS
 	void Render();
 	static void Release();
 };
-#endif // !GAMEMANAGER_H
+#endif // !GAME_MANAGER_H

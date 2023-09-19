@@ -1,28 +1,24 @@
 #include "GameManager.h"
 
-GameManager* GameManager::sInstance = nullptr;
-
+GameManager* GameManager::p_ThisInstance = nullptr;
+// SINGLETON START
 GameManager* GameManager::Instance()
 {
-	if (sInstance == nullptr)
+	if (p_ThisInstance == nullptr)
 	{
-		sInstance = new GameManager();
+		p_ThisInstance = new GameManager();
 	}
 
-	return sInstance;
+	return p_ThisInstance;
 }
+// SINGLETON END
 
-void GameManager::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
-}
 
 GameManager::GameManager()
 {
 	stbi_set_flip_vertically_on_load(true);
-	pGraphics = GraphicsManager::Instance();
-	pScreenManager = ScreenManager::Instance();
+	p_GraphicsManager = GraphicsManager::Instance();
+	p_ScreenManager = ScreenManager::Instance();
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
 
@@ -39,14 +35,13 @@ void GameManager::Run()
 		Update();
 		LateUpdate();
 		Render();
-
 		glfwPollEvents();
 	}
 }
 
 void GameManager::Update()
 {
-	pScreenManager->Update();
+	p_ScreenManager->Update();
 }
 
 void GameManager::LateUpdate()
@@ -58,6 +53,12 @@ void GameManager::Render()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	pScreenManager->Render();
+	p_ScreenManager->Render();
 	glfwSwapBuffers(GraphicsManager::Instance()->GetWindow());
+}
+
+void GameManager::Release()
+{
+	delete p_ThisInstance;
+	p_ThisInstance = nullptr;
 }

@@ -61,10 +61,10 @@ Font::Font(std::string fontName, Shader& shaderToUse)
 	glm::mat4 screenProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 	_FontShader.Use();
 	glUniformMatrix4fv(glGetUniformLocation(_FontShader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(screenProjection));
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glGenVertexArrays(1, &_VAO);
+	glGenBuffers(1, &_VBO);
+	glBindVertexArray(_VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
@@ -77,7 +77,7 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 	_FontShader.Use();
 	glUniform3f(glGetUniformLocation(_FontShader.GetID(), "textColor"), color.x, color.y, color.z);
 	glActiveTexture(GL_TEXTURE0);
-	glBindVertexArray(VAO);
+	glBindVertexArray(_VAO);
 
 	// iterate through all characters
 	std::string::const_iterator totalCharacters;
@@ -101,7 +101,7 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 							   };
 
 		glBindTexture(GL_TEXTURE_2D, singleCharacter.ID);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, _VBO);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 

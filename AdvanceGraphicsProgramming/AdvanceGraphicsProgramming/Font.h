@@ -21,11 +21,11 @@ struct Character
 
 class Font
 {
-private: // CONTAINER
+private: // CONTAINERS
 	std::map<char, Character> _CharacterList;
 
 private: // VARIABLES
-	unsigned int VAO, VBO;
+	unsigned int _VAO, _VBO;
 	Shader _FontShader;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS

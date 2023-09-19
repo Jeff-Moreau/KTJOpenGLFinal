@@ -1,5 +1,5 @@
-#ifndef GRAPHICSMANAGER_H
-#define GRAPHICSMANAGER_H
+#ifndef GRAPHICS_MANAGER_H
+#define GRAPHICS_MANAGER_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -7,22 +7,28 @@
 
 class GraphicsManager
 {
-public:
-	const unsigned int SCR_WIDTH = 1920;
-	const unsigned int SCR_HEIGHT = 1080;
+public: // GLOBALS
+	const unsigned int SCREEN_WIDTH = 1920;
+	const unsigned int SCREEN_HEIGHT = 1080;
 
-private:
-	static GraphicsManager* sInstance;
-	GLFWwindow* pWindow;
+private: // SINGLETON
+	static GraphicsManager* p_ThisInstance;
 
-public:
+private: // POINTER VARIABLES
+	GLFWwindow* p_GameWindow;
+
+public: // SINGLETON
+	static GraphicsManager* Instance();
+
+public:// CONSTRUCTORS / DESTRUCTORS / OVERLOADS
 	GraphicsManager();
 	~GraphicsManager();
 
-	static GraphicsManager* Instance();
-	static void Release();
-	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
-
+public: // GETTERS
 	GLFWwindow* GetWindow();
+
+public: // DOERS
+	static void FramebufferSizeCallback(GLFWwindow* gameWindow, int width, int height);
+	static void Release();
 };
-#endif // !GRAPHICSMANAGER_H
+#endif // !GRAPHICS_MANAGER_H
