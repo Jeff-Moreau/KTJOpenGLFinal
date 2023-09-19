@@ -11,21 +11,24 @@
 
 class Shader
 {
-private:
-	unsigned int id;
+private: // LOCAL VARIABLES
+	unsigned int _ID;
 
-public:
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	Shader();
 	Shader(const char* vertexPath, const char* fragmentPath);
-	Shader() {}
 	~Shader();
 
-	void Use();
+public: // GETTERS
+	unsigned int GetID();
 
+public: // SETTERS
 	void SetBool(const std::string& name, bool value) const;
 	void SetInt(const std::string& name, int value) const;
 	void SetFloat(const std::string& name, float value) const;
 	void SetMat4(const std::string& name, glm::mat4& value) const;
 
-	unsigned int GetID();
+public: // DOERS
+	void Use();
 };
 #endif // !SHADER_H

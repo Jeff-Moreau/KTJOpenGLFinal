@@ -1,56 +1,78 @@
 #include "Camera.h"
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : _Front(glm::vec3(0.0f, 0.0f, -1.0f)), _MovementSpeed(SPEED), _MouseSensitivity(SENSITIVITY), _Zoom(ZOOM)
 {
-    Position = position;
-    WorldUp = up;
-    Yaw = yaw;
-    Pitch = pitch;
+    _Position = position;
+    _WorldUp = up;
+    _Yaw = yaw;
+    _Pitch = pitch;
     UpdateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : _Front(glm::vec3(0.0f, 0.0f, -1.0f)), _MovementSpeed(SPEED), _MouseSensitivity(SENSITIVITY), _Zoom(ZOOM)
 {
-    Position = glm::vec3(posX, posY, posZ);
-    WorldUp = glm::vec3(upX, upY, upZ);
-    Yaw = yaw;
-    Pitch = pitch;
+    _Position = glm::vec3(posX, posY, posZ);
+    _WorldUp = glm::vec3(upX, upY, upZ);
+    _Yaw = yaw;
+    _Pitch = pitch;
     UpdateCameraVectors();
 }
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    return glm::lookAt(Position, Position + Front, Up);
+    return glm::lookAt(_Position, _Position + _Front, _Up);
+}
+
+float Camera::GetZoom()
+{
+    return _Zoom;
 }
 
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
-    float velocity = MovementSpeed * deltaTime;
+    float velocity = _MovementSpeed * deltaTime;
+
     if (direction == FORWARD)
-        Position += Front * velocity;
+    {
+        _Position += _Front * velocity;
+    }
+
     if (direction == BACKWARD)
-        Position -= Front * velocity;
+    {
+        _Position -= _Front * velocity;
+    }
+
     if (direction == LEFT)
-        Position -= Right * velocity;
+    {
+        _Position -= _Right * velocity;
+    }
+
     if (direction == RIGHT)
-        Position += Right * velocity;
+    {
+        _Position += _Right * velocity;
+    }
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
 {
-    xoffset *= MouseSensitivity;
-    yoffset *= MouseSensitivity;
+    xoffset *= _MouseSensitivity;
+    yoffset *= _MouseSensitivity;
 
-    Yaw += xoffset;
-    Pitch += yoffset;
+    _Yaw += xoffset;
+    _Pitch += yoffset;
 
     // make sure that when pitch is out of bounds, screen doesn't get flipped
     if (constrainPitch)
     {
-        if (Pitch > 89.0f)
-            Pitch = 89.0f;
-        if (Pitch < -89.0f)
-            Pitch = -89.0f;
+        if (_Pitch > 89.0f)
+        {
+            _Pitch = 89.0f;
+        }
+
+        if (_Pitch < -89.0f)
+        {
+            _Pitch = -89.0f;
+        }
     }
 
     // update Front, Right and Up Vectors using the updated Euler angles
@@ -59,27 +81,29 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
 
 void Camera::ProcessMouseScroll(float yoffset)
 {
-    Zoom -= (float)yoffset;
-    if (Zoom < 1.0f)
-        Zoom = 1.0f;
-    if (Zoom > 45.0f)
-        Zoom = 45.0f;
+    _Zoom -= (float)yoffset;
+
+    if (_Zoom < 1.0f)
+    {
+        _Zoom = 1.0f;
+    }
+
+    if (_Zoom > 45.0f)
+    {
+        _Zoom = 45.0f;
+    }
 }
 
 void Camera::UpdateCameraVectors()
 {
     // calculate the new Front vector
     glm::vec3 front;
-    front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    front.y = sin(glm::radians(Pitch));
-    front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    Front = glm::normalize(front);
-    // also re-calculate the Right and Up vector
-    Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-    Up = glm::normalize(glm::cross(Right, Front));
-}
+    front.x = cos(glm::radians(_Yaw)) * cos(glm::radians(_Pitch));
+    front.y = sin(glm::radians(_Pitch));
+    front.z = sin(glm::radians(_Yaw)) * cos(glm::radians(_Pitch));
+    _Front = glm::normalize(front);
 
-float Camera::GetZoom()
-{
-    return Zoom;
+    // also re-calculate the Right and Up vector
+    _Right = glm::normalize(glm::cross(_Front, _WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+    _Up = glm::normalize(glm::cross(_Right, _Front));
 }
