@@ -7,15 +7,15 @@
 
 class GraphicsManager
 {
-public: // GLOBALS
+public: // GLOBAL VARIABLES
 	const unsigned int SCREEN_WIDTH = 1920;
 	const unsigned int SCREEN_HEIGHT = 1080;
 
+private: // LOCAL POINTER VARIABLES
+	GLFWwindow* p_GameWindow;
+
 private: // SINGLETON
 	static GraphicsManager* p_ThisInstance;
-
-private: // POINTER VARIABLES
-	GLFWwindow* p_GameWindow;
 
 public: // SINGLETON
 	static GraphicsManager* Instance();

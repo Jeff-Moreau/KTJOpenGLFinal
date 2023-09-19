@@ -9,18 +9,18 @@
 
 class GameManager
 {
-private: // SINGLETON
-	static GameManager* p_ThisInstance;
-
-private: // POINTER VARIABLES
+private: // LOCAL POINTER VARIABLES
 	GraphicsManager* p_GraphicsManager;
 	ScreenManager* p_ScreenManager;
 
-private: // VARIABLES
+private: // LOCAL VARIABLES
 	Camera _Camera;
 	glm::vec3 _CameraPos;
 	glm::vec3 _CameraFront;
 	glm::vec3 _CameraUp;
+
+private: // SINGLETON
+	static GameManager* p_ThisInstance;
 
 public: // SINGLETON
 	static GameManager* Instance();

@@ -1,49 +1,60 @@
-#ifndef _INPUTMANAGER_H
-#define _INPUTMANAGER_H
+#ifndef INPUT_MANAGER_H
+#define INPUT_MANAGER_H
 
 #include "MathHelper.h"
 #include "SDL2/SDL.h"
 #include <string>
 
-namespace SDLFramework {
+namespace SDLFramework
+{
 	class InputManager
 	{
-	public:
-		enum MouseButton { Left = 0, Right, Middle, Back, Forward };
-	private:
-		static InputManager* sInstance;
+	public: // GLOBAL VARIABLES
+		enum MouseButton
+		{
+			Left = 0,
+			Right,
+			Middle,
+			Back,
+			Forward
+		};
 
-	public:
+	private: // LOCAL POINTER VARIABLES
+		const Uint8* p_CurrentKeyPressed;
+		Uint8* p_PreviousKeyPressed;
+
+	private: // LOCAL VARIABLES
+		Uint32 _CurrentMouseKeyPressed;
+		Uint32 _PreviousMouseKeyPressed;
+		int _KeyPressed;
+		int _CurrentMouseXPos;
+		int _CurrentMouseYPos;
+
+	private: // SINGLETON
+		static InputManager* p_ThisInstance;
+
+	public: // SINGLETON
 		static InputManager* Instance();
-		static void Release();
 
-	private:
-		const Uint8* m_pKeyboardState;
-		Uint8* m_pPrevKeyboardState;
-		int mKeyLength;
-
-		Uint32 mPrevMouseState;
-		Uint32 mMouseState;
-		int mMouseXPosition;
-		int mMouseYPosition;
-
-	public:
-		bool KeyDown(SDL_Scancode scancode);	// <------Holding down the key
-		bool KeyPressed(SDL_Scancode scancode); // <------Single press
-		bool KeyReleased(SDL_Scancode scancode);// <------Releasing the key
-
-		bool MouseButtonDown(MouseButton button);
-		bool MouseButtonPressed(MouseButton button);
-		bool MouseButtonReleased(MouseButton button);
-
-		Vector2 MousePosition();
-
-		void Update();
-		void UpdatePrevInput();
-
-	private:
+	private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 		InputManager();
 		~InputManager();
+
+	public: // GETTERS
+		bool GetKeyDown(SDL_Scancode scancode);
+		bool GetKeyPressed(SDL_Scancode scancode);
+		bool GetKeyReleased(SDL_Scancode scancode);
+
+		bool GetMouseButtonDown(MouseButton button);
+		bool GetMouseButtonPressed(MouseButton button);
+		bool GetMouseButtonReleased(MouseButton button);
+
+		Vector2 GetMousePosition();
+
+	public: // DOERS
+		void Update();
+		void UpdatePrevInput();
+		static void Release();
 	};
 }
-#endif // !_INPUTMANAGER_H
+#endif // !INPUT_MANAGER_H
