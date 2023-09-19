@@ -1,31 +1,37 @@
-#pragma once
+#ifndef SCREEN_MANAGER_H
+#define SCREEN_MANAGER_H
 
 #include "StartScreen.h"
 #include <vector>
 
 class ScreenManager
 {
-public:
-	enum Screens { Start, Play};
+public: // GLOBALS
+	enum Screens
+	{
+		Start,
+		Play
+	};
 
-private:
-	static ScreenManager* sInstance;
-	std::vector<Screen*> m_pScreens;
-	Screens mCurrentScreen; // <-- used to determine which screens needs to be render and updating
+private: // SINGLETON
+	static ScreenManager* p_ThisInstance;
 
-public:
+private: // CONTAINERS
+	std::vector<Screen*> p_Screens;
+
+private: // VARIABLES
+	Screens _CurrentScreen; // <-- used to determine which screens needs to be render and updating
+
+public:// SINGLETON
 	static ScreenManager* Instance();
-	static void Release();
 
-private:
+private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	ScreenManager();
 	~ScreenManager();
 
-public:
-
+public: // DOERS
 	void Update();
 	void Render();
+	static void Release();
 };
-
-
-
+#endif // !SCREEN_MANAGER_H
