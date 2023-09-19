@@ -1,19 +1,23 @@
-#ifndef _MATHHELPER_H
-#define _MATHHELPER_H
+#ifndef MATH_HELPER_H
+#define MATH_HELPER_H
+
 #include <math.h>
 
 #define PI 3.1415926535
 #define DEG_TO_RAD PI / 180.0f
 #define RAD_TO_DEG 180.0f / PI
 
-namespace SDLFramework {
-	struct Vector2 {
+namespace SDLFramework
+{
+	struct Vector2
+	{
 		float x;
 		float y;
 
 		Vector2(float _x = 0.0f, float _y = 0.0f) : x{ _x }, y{ _y } {}
 
-		float MagnitudeSqr() {
+		float MagnitudeSqr()
+		{
 			return x * x + y * y;
 		}
 
@@ -165,4 +169,4 @@ namespace SDLFramework {
 	};
 }
 
-#endif // !_MATHHELPER_H
+#endif // !MATH_HELPER_H

@@ -8,8 +8,8 @@
 class GraphicsManager
 {
 public: // GLOBAL VARIABLES
-	const unsigned int SCREEN_WIDTH = 1920;
-	const unsigned int SCREEN_HEIGHT = 1080;
+	const unsigned int SCREEN_WIDTH = 960;
+	const unsigned int SCREEN_HEIGHT = 540;
 
 private: // LOCAL POINTER VARIABLES
 	GLFWwindow* p_GameWindow;

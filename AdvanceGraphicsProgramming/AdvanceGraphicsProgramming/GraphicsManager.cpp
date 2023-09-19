@@ -21,7 +21,7 @@ GraphicsManager::GraphicsManager()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "KTJ OpenGL Final", nullptr, nullptr);
+	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jarjar Drinks - Ken, Tammy, Jeff", nullptr, nullptr);
 
 	if (p_GameWindow == nullptr)
 	{

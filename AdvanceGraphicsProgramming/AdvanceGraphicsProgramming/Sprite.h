@@ -7,23 +7,31 @@
 
 class Sprite
 {
-private:
-	unsigned int tex;
-	float vertices[32];
-	unsigned int indices[6] = {
-		0, 1, 3,	//first triangle
-		1, 2, 3		//second triangle
-	};
-	unsigned int VBO, VAO, EBO;
-	float x, y, w, h;
-	Shader shader;
+private: // LOCAL VARIABLES
+	unsigned int _Texture;
+	unsigned int _VBO;
+	unsigned int _VAO;
+	unsigned int _EBO;
+	float _XPos;
+	float _YPos;
+	float _Width;
+	float _Height;
+	Shader _Shader;
 
-public:
-	Sprite() {};
-	Sprite(std::string filename, Shader& aShader); //fullscreen image
-	Sprite(std::string filename, Shader& aShader, float x, float y, float w, float h);
+private: // LOCAL CONTAINERS
+	float _Vertices[32];
+	unsigned int _Indices[6] = {
+								0, 1, 3,	//first triangle
+								1, 2, 3		//second triangle
+							   };
+
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	Sprite();
+	Sprite(std::string imageName, Shader& shaderToUse); //fullscreen image
+	Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h);
 	~Sprite();
 
+public: // DOERS
 	void GLSettings();
 	void Render();
 };
