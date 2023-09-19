@@ -72,8 +72,16 @@ Font::Font(std::string fontName, Shader& shaderToUse)
 	glBindVertexArray(0);
 }
 
+Vector2 Font::GetFontPosition()
+{
+	return Vector2(_XPos, _YPos);
+}
+
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
+	_XPos = x;
+	_YPos = y;
+
 	_FontShader.Use();
 	glUniform3f(glGetUniformLocation(_FontShader.GetID(), "textColor"), color.x, color.y, color.z);
 	glActiveTexture(GL_TEXTURE0);

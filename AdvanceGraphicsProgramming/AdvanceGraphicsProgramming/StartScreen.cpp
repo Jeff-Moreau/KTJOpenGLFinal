@@ -1,7 +1,10 @@
 #include "StartScreen.h"
 
+
 StartScreen::StartScreen()
 {
+	p_Inputs = InputManager::Instance();
+
 	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
 	p_BackGroundImage = new Sprite("Assets/Textures/KTJBackground.png", _Shader);
 
@@ -20,12 +23,15 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
+	/*if (p_Inputs->GetMousePosition() == p_MenuFont->GetFontPosition())
+	{
 
+	}*/
 }
 
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
-	p_MenuFont->RenderText("Start New Game", 225, 300, 0.75f, glm::vec3(255,255,255));
-	p_MenuFont->RenderText("Exit Game", 300, 250, 0.75f, glm::vec3(255, 255, 255));
+	p_MenuFont->RenderText("Start New Game", 285, 275, 0.5f, glm::vec3(255,255,255));
+	p_MenuFont->RenderText("Exit Game", 575, 25, 0.75f, glm::vec3(0, 0, 0));
 }

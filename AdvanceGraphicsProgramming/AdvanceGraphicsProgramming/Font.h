@@ -7,9 +7,12 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include "MathHelper.h"
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 #include "Shader.h"
+
+using namespace SDLFramework;
 
 struct Character
 {
@@ -25,12 +28,17 @@ private: // LOCAL CONTAINERS
 	std::map<char, Character> _CharacterList;
 
 private: // LOCAL VARIABLES
+	float _XPos;
+	float _YPos;
 	unsigned int _VAO, _VBO;
 	Shader _FontShader;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
 	Font(std::string fontName, Shader& shaderToUse);
+
+public: // GETTERS
+	Vector2 GetFontPosition();
 
 public: // DOERS
 	void RenderText(std::string text, float x, float y, float scale, glm::vec3 color);
