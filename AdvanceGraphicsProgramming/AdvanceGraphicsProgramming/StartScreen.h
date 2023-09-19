@@ -6,16 +6,19 @@
 
 class StartScreen : public Screen
 {
-private:
-	Sprite* background;
-	Shader shader;
-	Shader fontShader;
-	Font* testFont;
+private: // LOCAL POINTER VARIABLES
+	Sprite* p_BackGroundImage;
+	Font* p_MenuFont;
 
-public:
+private: // LOCAL VARIABLES
+	Shader _Shader;
+	Shader _FontShader;
+
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	StartScreen();
 	~StartScreen();
 
+public: // DOERS
 	void Update();
 	void Render();
 };
