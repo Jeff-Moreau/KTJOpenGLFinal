@@ -1,11 +1,13 @@
 #ifndef START_SCREEN_H
 #define START_SCREEN_H
 
+#include "GraphicsManager.h"
 #include "InputManager.h"
 #include "Screen.h"
 #include "Sprite.h"
 #include "Font.h"
 #include "glm/glm.hpp"
+#include "GLFW/glfw3.h"
 
 using namespace SDLFramework;
 
@@ -14,12 +16,13 @@ class StartScreen : public Screen
 private: // MEMBER POINTER VARIABLE DECLARATIONS
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
-	Font* p_MenuFont;
+	Font* p_ExitGame;
+	Font* p_NewGame;
 
 private: // MEMBER VARIABLE DECLARATIONS
-	glm::vec3 _ExitColor;
 	Shader _Shader;
 	Shader _FontShader;
+	glm::vec3 _ExitColor;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	StartScreen();
