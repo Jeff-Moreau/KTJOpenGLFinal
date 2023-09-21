@@ -23,14 +23,7 @@ namespace SDLFramework
 
 	AssetManager::~AssetManager()
 	{
-		for (auto tex : p_SDLTextures)
-		{
-			if (tex.second != nullptr)
-			{
-				SDL_DestroyTexture(tex.second);
-			}
-		}
-		p_SDLTextures.clear();
+
 	}
 
 	Mix_Music* AssetManager::GetMusic(std::string fileName, bool managed)
@@ -75,66 +68,6 @@ namespace SDLFramework
 		}
 
 		return p_SFXs[fullPath];
-	}
-
-	void AssetManager::DestroySurface(SDL_Surface* surface)
-	{
-		if (p_SDLSurfaceTexturesList.find(surface) != p_SDLSurfaceTexturesList.end())
-		{
-			p_SDLSurfaceTexturesList[surface] -= 1;
-			if (p_SDLSurfaceTexturesList[surface] == 0)
-			{
-				for (auto elem : p_SDLSurfaceTextures)
-				{
-					if (elem.second == surface)
-					{
-						SDL_FreeSurface(elem.second);
-						p_SDLSurfaceTextures.erase(elem.first);
-						return; // leave function
-					}
-				}
-
-				for (auto elem : p_SDLSurfaceTexts)
-				{
-					if (elem.second == surface)
-					{
-						SDL_FreeSurface(elem.second);
-						p_SDLSurfaceTexts.erase(elem.first);
-						return; // leave function
-					}
-				}
-			}
-		}
-	}
-
-	void AssetManager::DestroyTexture(SDL_Texture* texture)
-	{
-		if (p_SDLTexturesList.find(texture) != p_SDLTexturesList.end())
-		{
-			p_SDLTexturesList[texture] -= 1;
-			if (p_SDLTexturesList[texture] == 0)
-			{
-				for (auto elem : p_SDLTextures)
-				{
-					if (elem.second == texture)
-					{
-						SDL_DestroyTexture(elem.second);
-						p_SDLTextures.erase(elem.first);
-						return;
-					}
-				}
-
-				for (auto elem : p_SDLTexts)
-				{
-					if (elem.second == texture)
-					{
-						SDL_DestroyTexture(elem.second);
-						p_SDLTexts.erase(elem.first);
-						return;
-					}
-				}
-			}
-		}
 	}
 
 	void AssetManager::DestroyMusic(Mix_Music* music)

@@ -24,6 +24,9 @@ StartScreen::~StartScreen()
 
 	delete p_NewGame;
 	p_NewGame = nullptr;
+
+	delete p_ExitGame;
+	p_ExitGame = nullptr;
 }
 
 void StartScreen::Update()
