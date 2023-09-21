@@ -1,27 +1,27 @@
 #ifndef _AUDIOMANAGER_H
 #define _AUDIOMANAGER_H
 
-#include "InputManager.h"
-#include <SDL2/SDL_audio.h>
+#include <SDL2/SDL.h>
+#include <vector>
+#include <string>
 
-class AudioManager
-{
-private:
+class AudioManager {
+public:
 	AudioManager();
 	~AudioManager();
-	
-	static AudioManager* sInstance;
 
-public:
-	static AudioManager* Instance();
-	static void Release();
+	bool Initialize();
+	void Shutdown();
 
-	void PlayMusic(std::string filename, int loops = -1);
-	void PauseMusic();
-	void ResumeMusic();
-	void StopMusic();
-	void ChangeVolume(int);
-	void PlaySFX(std::string filename, int loops = 0, int channel = -1);
+	bool LoadSound(const std::string& soundPath);
+	void PlaySound(int soundIndex, int volume = 128);
+	void StopAllSounds();
+
+private:
+	SDL_AudioDeviceID audioDevice;
+	std::vector<SDL_AudioSpec> soundSpecs;
+	std::vector<Uint8*> soundBuffers;
 };
+
 
 #endif
