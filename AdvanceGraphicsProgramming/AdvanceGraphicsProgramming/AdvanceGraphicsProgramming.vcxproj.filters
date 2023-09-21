@@ -57,7 +57,7 @@
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="MyMouse.cpp">
+    <ClCompile Include="PlayScreen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,7 +98,7 @@
     <ClInclude Include="MathHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyMouse.h">
+    <ClInclude Include="PlayScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

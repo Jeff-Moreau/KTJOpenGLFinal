@@ -18,6 +18,7 @@ ScreenManager::ScreenManager()
 {
 	// MEMBER VARIABLE AND CONTAINERS INSTANTIATION
 	p_Screens.push_back(new StartScreen());
+	p_Screens.push_back(new PlayScreen());
 	_CurrentScreen = Start;
 }
 
@@ -28,6 +29,11 @@ ScreenManager::~ScreenManager()
 		delete p_Screens[i];
 		p_Screens[i] = nullptr;
 	}
+}
+
+void ScreenManager::SetCurrentScreen(Screens newScreen)
+{
+	_CurrentScreen = newScreen;
 }
 
 void ScreenManager::Update()

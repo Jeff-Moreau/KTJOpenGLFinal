@@ -2,6 +2,7 @@
 #define SCREEN_MANAGER_H
 
 #include "StartScreen.h"
+#include "PlayScreen.h"
 #include <vector>
 
 class ScreenManager
@@ -28,6 +29,9 @@ public:// SINGLETON
 private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	ScreenManager();
 	~ScreenManager();
+
+public: // SETTERS
+	void SetCurrentScreen(Screens newScreen);
 
 public: // DOERS
 	void Update();

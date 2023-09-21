@@ -40,7 +40,7 @@ public:
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
-	Font(std::string fontName, Shader& shaderToUse);
+	Font(std::string fontName, Shader& shaderToUse, int pixHeight);
 
 public: // GETTERS
 	Vector2 GetFontPosition();

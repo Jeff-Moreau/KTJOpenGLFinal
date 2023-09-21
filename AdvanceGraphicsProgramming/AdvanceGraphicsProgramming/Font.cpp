@@ -5,7 +5,7 @@ Font::Font()
 	_TotalCharacters = 0;
 }
 
-Font::Font(std::string fontName, Shader& shaderToUse)
+Font::Font(std::string fontName, Shader& shaderToUse, int pixHeight)
 {
 	// MEMBER VARIABLE INSTANTIATION
 	_FontShader = shaderToUse;
@@ -28,7 +28,7 @@ Font::Font(std::string fontName, Shader& shaderToUse)
 	else
 	{
 		// set size to load glyphs as
-		FT_Set_Pixel_Sizes(fontTypeFace, 0, 48);
+		FT_Set_Pixel_Sizes(fontTypeFace, 0, pixHeight);
 
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -93,9 +93,8 @@ Vector2 Font::GetFontPosition()
 
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
-	_TotalCharacters = 0;
-			TextWidth = _CharacterList.size();
 	// MEMBER VARIABLE INSTANTIATION
+	_TotalCharacters = 0;
 	_XPos = x;
 	_YPos = y;
 	_FontShader.Use();
@@ -110,7 +109,6 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 
 	for (totalCharacters = text.begin(); totalCharacters != text.end(); totalCharacters++)
 	{
-		
 		Character singleCharacter = _CharacterList[*totalCharacters];
 
 		float characterXPos = x + singleCharacter.Bearing.x * scale;
