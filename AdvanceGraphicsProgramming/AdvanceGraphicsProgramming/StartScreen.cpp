@@ -3,6 +3,7 @@
 
 StartScreen::StartScreen()
 {
+	_HoverExitGame = false;
 	// MEMBER VARIABLE AND POINTERS INSTANTIATION
 	p_Inputs = InputManager::Instance();
 
@@ -25,7 +26,35 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
+	glfwGetCursorPos(GraphicsManager::Instance()->GetWindow(), &_MouseX, &_MouseY);
 
+	//std::cout << _MouseY << std::endl;
+	std::cout << (((GraphicsManager::Instance()->SCREEN_HEIGHT - p_ExitGame->GetFontPosition().y) - 30) + p_ExitGame->TextHeight) << std::endl;
+
+	if ((_MouseY < ((GraphicsManager::Instance()->SCREEN_HEIGHT - p_ExitGame->GetFontPosition().y) - 30) + p_ExitGame->TextHeight) && (_MouseY > (GraphicsManager::Instance()->SCREEN_HEIGHT - p_ExitGame->GetFontPosition().y) - 30))
+	{
+		if ((_MouseX > p_ExitGame->GetFontPosition().x) && (_MouseX < p_ExitGame->GetFontPosition().x + 210))
+		{
+			_ExitColor = glm::vec3(255,0,0);
+			_HoverExitGame = true;
+		}
+		else
+		{
+			_HoverExitGame = false;
+			_ExitColor = glm::vec3(0, 0, 0);
+		}
+	}
+	else
+	{
+		_HoverExitGame = false;
+		_ExitColor = glm::vec3(0, 0, 0);
+	}
+	
+	int state = glfwGetMouseButton(GraphicsManager::Instance()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
+	if (state == GLFW_PRESS && _HoverExitGame)
+	{
+		std::cout << "StartGame now" << std::endl;
+	}
 }
 
 void StartScreen::Render()

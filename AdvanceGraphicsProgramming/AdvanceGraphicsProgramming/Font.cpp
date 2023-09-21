@@ -2,6 +2,7 @@
 
 Font::Font()
 {
+	_TotalCharacters = 0;
 }
 
 Font::Font(std::string fontName, Shader& shaderToUse)
@@ -28,6 +29,7 @@ Font::Font(std::string fontName, Shader& shaderToUse)
 	{
 		// set size to load glyphs as
 		FT_Set_Pixel_Sizes(fontTypeFace, 0, 48);
+
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -59,6 +61,7 @@ Font::Font(std::string fontName, Shader& shaderToUse)
 			Character character = {texture,glm::ivec2(fontTypeFace->glyph->bitmap.width, fontTypeFace->glyph->bitmap.rows),glm::ivec2(fontTypeFace->glyph->bitmap_left, fontTypeFace->glyph->bitmap_top),fontTypeFace->glyph->advance.x};
 			
 			_CharacterList.insert(std::pair<char, Character>(c, character));
+
 		}
 	}
 
@@ -90,6 +93,8 @@ Vector2 Font::GetFontPosition()
 
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
+	_TotalCharacters = 0;
+			TextWidth = _CharacterList.size();
 	// MEMBER VARIABLE INSTANTIATION
 	_XPos = x;
 	_YPos = y;
@@ -105,6 +110,7 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 
 	for (totalCharacters = text.begin(); totalCharacters != text.end(); totalCharacters++)
 	{
+		
 		Character singleCharacter = _CharacterList[*totalCharacters];
 
 		float characterXPos = x + singleCharacter.Bearing.x * scale;
@@ -128,7 +134,11 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		x += (singleCharacter.Offset >> 6) * scale;
+		_TotalCharacters++;
+		TextWidth = _TotalCharacters * characterWidth;
+		TextHeight = characterHeight;
 	}
+
 
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);

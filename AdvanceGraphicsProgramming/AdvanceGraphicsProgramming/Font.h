@@ -32,6 +32,11 @@ private: // MEMBER VARIABLE DECLARATIONS
 	float _YPos;
 	unsigned int _VAO, _VBO;
 	Shader _FontShader;
+	int _TotalCharacters;
+
+public:
+	int TextWidth;
+	int TextHeight;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
