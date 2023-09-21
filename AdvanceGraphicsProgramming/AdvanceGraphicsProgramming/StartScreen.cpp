@@ -6,6 +6,7 @@ StartScreen::StartScreen()
 	_HoverExitGame = false;
 	_HoverNewGame = false;
 	// MEMBER VARIABLE AND POINTERS INSTANTIATION
+	p_SoundFX = AudioManager::Instance();
 	p_Inputs = InputManager::Instance();
 
 	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
@@ -34,6 +35,7 @@ void StartScreen::Update()
 	{
 		if ((_MouseX > p_ExitGame->GetFontPosition().x) && (_MouseX < p_ExitGame->GetFontPosition().x + p_ExitGame->TextWidth))
 		{
+			
 			_ExitColor = glm::vec3(255,0,0);
 			_HoverExitGame = true;
 		}
@@ -60,24 +62,33 @@ void StartScreen::Update()
 		if ((_MouseX > p_NewGame->GetFontPosition().x) && (_MouseX < p_NewGame->GetFontPosition().x + p_NewGame->TextWidth))
 		{
 			_StartColor = glm::vec3(0, 255, 255);
+			_HoverSoundOn++;
 			_HoverNewGame = true;
 		}
 		else
 		{
+			_HoverSoundOn = 0;
 			_HoverNewGame = false;
 			_StartColor = glm::vec3(255, 255, 255);
 		}
 	}
 	else
 	{
+		_HoverSoundOn = 0;
 		_HoverNewGame = false;
 		_StartColor = glm::vec3(255, 255, 255);
 	}
 
 	if (state == GLFW_PRESS && _HoverNewGame)
 	{
+		p_SoundFX->PlaySFX("CursorMovementSFX.mp3");
 		ScreenManager::Instance()->SetCurrentScreen(ScreenManager::Instance()->Play);
 		std::cout << "Start Game now" << std::endl;
+	}
+
+	if (_HoverSoundOn == 1)
+	{
+		p_SoundFX->PlaySFX("droidnoise.mp3");
 	}
 }
 

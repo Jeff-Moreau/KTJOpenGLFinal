@@ -1,6 +1,7 @@
 #ifndef START_SCREEN_H
 #define START_SCREEN_H
 
+#include "AudioManager.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
 #include "Screen.h"
@@ -14,6 +15,7 @@ using namespace SDLFramework;
 class StartScreen : public Screen
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
+	AudioManager* p_SoundFX;
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
 	Font* p_ExitGame;
@@ -28,6 +30,7 @@ private: // MEMBER VARIABLE DECLARATIONS
 	double _MouseY;
 	bool _HoverExitGame;
 	bool _HoverNewGame;
+	int _HoverSoundOn;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	StartScreen();
