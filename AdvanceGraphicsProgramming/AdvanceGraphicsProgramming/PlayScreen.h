@@ -1,33 +1,25 @@
 #ifndef PLAY_SCREEN_H
 #define PLAY_SCREEN_H
 
-#include "GraphicsManager.h"
-#include "InputManager.h"
 #include "Screen.h"
-#include "Sprite.h"
-#include "Font.h"
-#include "glm/glm.hpp"
-#include "GLFW/glfw3.h"
 
 using namespace SDLFramework;
 
 class PlayScreen : public Screen
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
+	AudioManager* p_SoundFX;
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
-	Font* p_ExitGame;
-	Font* p_NewGame;
+	Font* p_MainMenu;
+	Font* p_Score;
+	Font* p_Round;
+	glm::vec3 _MainMenuColor;
+	bool _HoverMainMenu;
 
 private: // MEMBER VARIABLE DECLARATIONS
 	Shader _Shader;
 	Shader _FontShader;
-	glm::vec3 _ExitColor;
-	glm::vec3 _StartColor;
-	double _MouseX;
-	double _MouseY;
-	bool _HoverExitGame;
-	bool _HoverNewGame;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	PlayScreen();

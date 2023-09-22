@@ -1,14 +1,7 @@
 #ifndef START_SCREEN_H
 #define START_SCREEN_H
 
-#include "AudioManager.h"
-#include "GraphicsManager.h"
-#include "InputManager.h"
 #include "Screen.h"
-#include "Sprite.h"
-#include "Font.h"
-#include "glm/glm.hpp"
-#include "GLFW/glfw3.h"
 
 using namespace SDLFramework;
 
@@ -26,11 +19,9 @@ private: // MEMBER VARIABLE DECLARATIONS
 	Shader _FontShader;
 	glm::vec3 _ExitColor;
 	glm::vec3 _StartColor;
-	double _MouseX;
-	double _MouseY;
 	bool _HoverExitGame;
 	bool _HoverNewGame;
-	int _HoverSoundOn;
+	int _HoverNewGameSound;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	StartScreen();

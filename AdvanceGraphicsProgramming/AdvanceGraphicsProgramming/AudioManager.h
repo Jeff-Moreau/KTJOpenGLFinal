@@ -7,15 +7,16 @@ namespace SDLFramework
 {
 	class AudioManager
 	{
-	private:
-		static AudioManager* p_Instance;
-
+	private: // MEMBER POINTER VARIABLES
 		AssetManager* m_pAssetManager;
+
+	private: // SINGLETON
+		static AudioManager* p_Instance;
 
 	public: // SINGLETON
 		static AudioManager* Instance();
 
-	private: // CONSTRUCTORS / DESTRUCTOR
+	private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 		AudioManager();
 		~AudioManager();
 
@@ -24,7 +25,11 @@ namespace SDLFramework
 		void PauseMusic();
 		void ResumeMusic();
 		void StopMusic();
+
+	public: // DOERS
 		void PlaySFX(std::string filename, int loops = 0, int channel = -1);
+
+	public: // CLEANUP
 		static void Release();
 	};
 }

@@ -1,5 +1,6 @@
 #include "GraphicsManager.h"
-
+namespace SDLFramework
+{
 GraphicsManager* GraphicsManager::p_ThisInstance = nullptr;
 
 // SINGLETON START
@@ -16,6 +17,11 @@ GraphicsManager* GraphicsManager::Instance()
 
 GraphicsManager::GraphicsManager()
 {
+	if (SDL_Init(SDL_INIT_EVENTS) < 0)
+	{
+		std::cerr << std::endl << "Something went wrong, cannot initialize SDL!" << std::endl;
+		std::cerr << "SDL Error : " << SDL_GetError() << std::endl;
+	}
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -23,6 +29,8 @@ GraphicsManager::GraphicsManager()
 
 	// MEMBER VARIABLE INSTANTIATION
 	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jarjar Drinks - Ken, Tammy, Jeff", nullptr, nullptr);
+	
+	
 
 	if (p_GameWindow == nullptr)
 	{
@@ -69,4 +77,5 @@ void GraphicsManager::Release()
 {
 	delete p_ThisInstance;
 	p_ThisInstance = nullptr;
+}
 }

@@ -17,9 +17,10 @@ GameManager* GameManager::Instance()
 GameManager::GameManager()
 {
 	stbi_set_flip_vertically_on_load(true);
-
+	_ExitGame = false;
 	// MEMBER POINTER VARIABLE INSTANTIATION
 	p_GraphicsManager = GraphicsManager::Instance();
+	p_Inputs = InputManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
@@ -34,6 +35,15 @@ void GameManager::Run()
 	// Game Loop
 	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow()))
 	{
+		while (SDL_PollEvent(&_Event))
+		{
+			switch (_Event.type)
+			{
+			case SDL_QUIT:
+				_ExitGame = true;
+				break;
+			}
+		}
 		Update();
 		LateUpdate();
 		Render();
@@ -43,12 +53,13 @@ void GameManager::Run()
 
 void GameManager::Update()
 {
+	p_Inputs->Update();
 	p_ScreenManager->Update();
 }
 
 void GameManager::LateUpdate()
 {
-
+	p_Inputs->UpdatePrevInput();
 }
 
 void GameManager::Render()

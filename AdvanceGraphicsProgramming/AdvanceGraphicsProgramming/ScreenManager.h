@@ -3,11 +3,12 @@
 
 #include "StartScreen.h"
 #include "PlayScreen.h"
+
 #include <vector>
 
 class ScreenManager
 {
-public: // GLOBAL VARIABLE DECLARATIONS
+public: // ACCESSABLE VARIABLE DECLARATIONS
 	enum Screens
 	{
 		Start,
@@ -23,7 +24,7 @@ private: // MEMBER VARIABLE DECLARATIONS
 private: // SINGLETON
 	static ScreenManager* p_ThisInstance;
 
-public:// SINGLETON
+public: // SINGLETON
 	static ScreenManager* Instance();
 
 private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
@@ -36,6 +37,8 @@ public: // SETTERS
 public: // DOERS
 	void Update();
 	void Render();
+
+public: // CLEANUP
 	static void Release();
 };
 #endif // !SCREEN_MANAGER_H

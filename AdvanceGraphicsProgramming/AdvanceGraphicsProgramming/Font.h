@@ -1,16 +1,17 @@
 #ifndef FONT_H
 #define FONT_H
 
-#include <glad/glad.h>
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include <string>
-#include <iostream>
-#include <map>
+#include "glm/ext/matrix_clip_space.hpp"
 #include "MathHelper.h"
-#include <glm/glm.hpp>
-#include <glm/ext/matrix_clip_space.hpp>
+#include "glad/glad.h"
+#include "ft2build.h"
+#include FT_FREETYPE_H
+#include "glm/glm.hpp"
 #include "Shader.h"
+
+#include <iostream>
+#include <string>
+#include <map>
 
 using namespace SDLFramework;
 
@@ -28,13 +29,13 @@ private: // MEMBER CONTAINER DECLARATIONS
 	std::map<char, Character> _CharacterList;
 
 private: // MEMBER VARIABLE DECLARATIONS
+	unsigned int _VAO, _VBO;
+	int _TotalCharacters;
+	Shader _FontShader;
 	float _XPos;
 	float _YPos;
-	unsigned int _VAO, _VBO;
-	Shader _FontShader;
-	int _TotalCharacters;
 
-public:
+public: // ACCESSABLE VARIABLE DECLARATIONS
 	int TextWidth;
 	int TextHeight;
 

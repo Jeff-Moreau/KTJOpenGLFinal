@@ -2,14 +2,14 @@
 #define INPUT_MANAGER_H
 
 #include "MathHelper.h"
-#include "SDL2/SDL.h"
+#include <SDL2/SDL.h>
 #include <string>
 
 namespace SDLFramework
 {
 	class InputManager
 	{
-	public: // GLOBAL VARIABLE DECLARATIONS
+	public: // ACCESSABLE VARIABLE DECLARATIONS
 		enum MouseButton
 		{
 			Left = 0,
