@@ -4,8 +4,12 @@
 PlayScreen::PlayScreen()
 {
 	p_SoundFX = AudioManager::Instance();
+
     _Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
     p_BackGroundImage = new Sprite("Assets/Textures/KTJPlayScreenBackDrop.png", _Shader);
+
+	_3DShader = Shader("Assets/Shaders/3DTexture.vs", "Assets/Shaders/3DTexture.fs");
+	p_TestBlock = new ModelOBJ("Assets/Textures/testbox.png", _3DShader);
 
     _FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
     p_Score = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 24);
@@ -50,6 +54,9 @@ void PlayScreen::Update()
 		std::cout << "Main Menu" << std::endl;
 	}
 
+	/*glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, p_TestBlock);*/
+
 	/*if (_HoverSoundOn == 1)
 	{
 		p_SoundFX->PlaySFX("droidnoise.mp3");
@@ -58,7 +65,9 @@ void PlayScreen::Update()
 
 void PlayScreen::Render()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     p_BackGroundImage->Render();
+	p_TestBlock->Render();
     p_Score->RenderText("Score :", 40, 57, 1, glm::vec3(0,0,0));
     p_Round->RenderText("Round :", 590, 57, 1, glm::vec3(0, 0, 0));
     p_MainMenu->RenderText("Main Menu", (GraphicsManager::Instance()->SCREEN_WIDTH / 2) - (p_MainMenu->TextWidth / 2), 10, 1, _MainMenuColor);

@@ -104,6 +104,7 @@ void StartScreen::Update()
 
 void StartScreen::Render()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	p_BackGroundImage->Render();
 	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
 	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);

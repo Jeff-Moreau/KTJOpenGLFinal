@@ -103,6 +103,9 @@ Sprite::~Sprite()
 
 void Sprite::GLSettings()
 {
+	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
 	glGenBuffers(1, &_EBO);
@@ -140,6 +143,7 @@ void Sprite::GLSettings()
 
 void Sprite::Render()
 {
+	glDepthMask(GL_FALSE);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _Texture);
 	_Shader.Use();

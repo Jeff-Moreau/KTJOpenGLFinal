@@ -11,6 +11,7 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	AudioManager* p_SoundFX;
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
+	ModelOBJ* p_TestBlock;
 	Font* p_MainMenu;
 	Font* p_Score;
 	Font* p_Round;
@@ -18,6 +19,7 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	bool _HoverMainMenu;
 
 private: // MEMBER VARIABLE DECLARATIONS
+	Shader _3DShader;
 	Shader _Shader;
 	Shader _FontShader;
 

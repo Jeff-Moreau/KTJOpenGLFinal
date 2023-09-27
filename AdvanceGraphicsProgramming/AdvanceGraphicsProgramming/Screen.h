@@ -3,6 +3,7 @@
 
 #include "AudioManager.h"
 #include "GraphicsManager.h"
+#include "ModelOBJ.h"
 #include "InputManager.h"
 #include "Sprite.h"
 #include "Font.h"

@@ -22,6 +22,7 @@ GraphicsManager::GraphicsManager()
 		std::cerr << std::endl << "Something went wrong, cannot initialize SDL!" << std::endl;
 		std::cerr << "SDL Error : " << SDL_GetError() << std::endl;
 	}
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -29,8 +30,6 @@ GraphicsManager::GraphicsManager()
 
 	// MEMBER VARIABLE INSTANTIATION
 	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jarjar Drinks - Ken, Tammy, Jeff", nullptr, nullptr);
-	
-	
 
 	if (p_GameWindow == nullptr)
 	{
@@ -41,6 +40,7 @@ GraphicsManager::GraphicsManager()
 	}
 
 	glfwMakeContextCurrent(p_GameWindow);
+	glfwSetFramebufferSizeCallback(p_GameWindow, FramebufferSizeCallback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -48,14 +48,7 @@ GraphicsManager::GraphicsManager()
 
 		return;
 	}
-
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	//glEnable(GL_DEPTH_TEST); // Text showing issues were right here may be a problem
-	//glEnable(GL_CULL_FACE); // same text issues here
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
 }
 
 GraphicsManager::~GraphicsManager()
