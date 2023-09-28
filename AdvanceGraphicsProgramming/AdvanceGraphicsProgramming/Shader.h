@@ -11,8 +11,8 @@
 
 class Shader
 {
-private: // MEMBER VARIABLE DECLARATIONS
-	unsigned int _ID;
+public: // MEMBER VARIABLE DECLARATIONS
+	unsigned int ID;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Shader();

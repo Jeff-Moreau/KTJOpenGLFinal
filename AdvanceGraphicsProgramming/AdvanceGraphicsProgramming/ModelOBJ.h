@@ -47,6 +47,9 @@ public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	ModelOBJ(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h);
 	~ModelOBJ();
 
+public: // GETTERS
+	glm::vec3 GetPosition();
+
 public: // DOERS
 	void GLSettings();
 	void Render();

@@ -96,6 +96,11 @@ ModelOBJ::~ModelOBJ()
 	glDeleteBuffers(1, &_EBO);
 }
 
+glm::vec3 ModelOBJ::GetPosition()
+{
+	return glm::vec3(_XPos, _YPos, 0);
+}
+
 void ModelOBJ::GLSettings()
 {
 	glGenVertexArrays(1, &_VAO);

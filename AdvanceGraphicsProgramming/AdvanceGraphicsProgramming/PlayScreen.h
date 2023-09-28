@@ -12,9 +12,11 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
 	ModelOBJ* p_TestBlock;
+	Model* p_Tammy;
 	Font* p_MainMenu;
 	Font* p_Score;
 	Font* p_Round;
+	Font* p_ScoreTotal;
 	glm::vec3 _MainMenuColor;
 	bool _HoverMainMenu;
 
@@ -22,6 +24,9 @@ private: // MEMBER VARIABLE DECLARATIONS
 	Shader _3DShader;
 	Shader _Shader;
 	Shader _FontShader;
+	bool _TimerReset;
+	float _Time;
+	int _NewTime;
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	PlayScreen();
