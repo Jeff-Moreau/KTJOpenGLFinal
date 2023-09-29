@@ -42,7 +42,7 @@ public: // ACCESSABLE VARIABLE DECLARATIONS
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
-	Font(std::string fontName, Shader& shaderToUse, int pixHeight);
+	Font(std::string fontName, int pixHeight);
 
 public: // GETTERS
 	Vector2 GetFontPosition();

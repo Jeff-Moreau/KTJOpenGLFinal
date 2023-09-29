@@ -11,9 +11,8 @@ StartScreen::StartScreen()
 
 	p_BackGroundImage = new Image("Assets/Textures/KTJTitleScreen.png");
 
-	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
-	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 24);
-	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 32);
+	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", 24);
+	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", 32);
 }
 
 StartScreen::~StartScreen()
@@ -104,6 +103,6 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
-	//p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
-	//p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
+	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
+	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
 }

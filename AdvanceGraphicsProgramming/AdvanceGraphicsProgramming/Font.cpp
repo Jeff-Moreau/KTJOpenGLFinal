@@ -5,13 +5,14 @@ Font::Font()
 	_TotalCharacters = 0;
 }
 
-Font::Font(std::string fontName, Shader& shaderToUse, int pixHeight)
+Font::Font(std::string fontName, int pixHeight)
 {
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	_FontShader = shaderToUse;
+	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
+
 	glm::mat4 screenProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 	_FontShader.Use();
 	glUniformMatrix4fv(glGetUniformLocation(_FontShader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(screenProjection));
@@ -81,7 +82,6 @@ Vector2 Font::GetFontPosition()
 
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
-	// MEMBER VARIABLE INSTANTIATION
 	_TotalCharacters = 0;
 	_XPos = x;
 	_YPos = y;
@@ -91,8 +91,6 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(_VAO);
 
-	// iterate through all characters
-	// LOCAL VARIABLE DECLARATIONS
 	std::string::const_iterator totalCharacters;
 
 	for (totalCharacters = text.begin(); totalCharacters != text.end(); totalCharacters++)

@@ -2,7 +2,6 @@
 
 ScreenManager* ScreenManager::p_ThisInstance = nullptr;
 
-// SINGLETON START
 ScreenManager* ScreenManager::Instance()
 {
 	if (p_ThisInstance == nullptr)
@@ -12,11 +11,9 @@ ScreenManager* ScreenManager::Instance()
 
 	return p_ThisInstance;
 }
-// SINGLETON END
 
 ScreenManager::ScreenManager()
 {
-	// MEMBER VARIABLE AND CONTAINERS INSTANTIATION
 	p_Screens.push_back(new StartScreen());
 	p_Screens.push_back(new PlayScreen());
 	_CurrentScreen = Start;

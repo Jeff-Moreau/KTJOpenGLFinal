@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
 GameManager* GameManager::p_ThisInstance = nullptr;
-// SINGLETON START
+
 GameManager* GameManager::Instance()
 {
 	if (p_ThisInstance == nullptr)
@@ -11,18 +11,15 @@ GameManager* GameManager::Instance()
 
 	return p_ThisInstance;
 }
-// SINGLETON END
 
 
 GameManager::GameManager()
 {
-	stbi_set_flip_vertically_on_load(true);
+	//stbi_set_flip_vertically_on_load(true);
 	_ExitGame = false;
-	// MEMBER POINTER VARIABLE INSTANTIATION
 	p_GraphicsManager = GraphicsManager::Instance();
 	p_Inputs = InputManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
-	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
 
 GameManager::~GameManager()
