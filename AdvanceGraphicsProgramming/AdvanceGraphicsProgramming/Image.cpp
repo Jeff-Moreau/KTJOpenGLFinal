@@ -1,13 +1,13 @@
-#include "Sprite.h"
+#include "Image.h"
 
-Sprite::Sprite()
+Image::Image()
 {
 
 }
 
-Sprite::Sprite(std::string imageName, Shader& shaderToUse)
+Image::Image(std::string imageName)
 {
-	_Shader = shaderToUse;
+	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
 	
 	GLSettings();
 
@@ -39,12 +39,11 @@ Sprite::Sprite(std::string imageName, Shader& shaderToUse)
 	stbi_image_free(newTexture);
 	_Shader.Use();
 	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
-	_Shader.SetInt("texture2", 1);
 }
 
-Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h)
+Image::Image(std::string imageName, float x, float y, float w, float h)
 {
-	_Shader = shaderToUse;
+	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
 
 	GLSettings();
 
@@ -76,17 +75,16 @@ Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, flo
 	
 	_Shader.Use(); 
 	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
-	_Shader.SetInt("texture2", 1);
 }
 
-Sprite::~Sprite()
+Image::~Image()
 {
 	glDeleteVertexArrays(1, &_VAO);
 	glDeleteBuffers(1, &_VBO);
 	glDeleteBuffers(1, &_EBO);
 }
 
-void Sprite::GLSettings()
+void Image::GLSettings()
 {
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
@@ -121,7 +119,7 @@ void Sprite::GLSettings()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void Sprite::Render()
+void Image::Render()
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _Texture);

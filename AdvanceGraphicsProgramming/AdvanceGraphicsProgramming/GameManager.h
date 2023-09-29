@@ -5,7 +5,7 @@
 #include "ScreenManager.h"
 #include "InputManager.h"
 #include "Shader.h"
-#include "Sprite.h"
+#include "Image.h"
 #include "Camera.h"
 
 class GameManager

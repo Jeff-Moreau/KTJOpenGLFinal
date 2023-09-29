@@ -152,7 +152,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="StbImage.cpp" />
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="TextButton.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -172,7 +172,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="StartScreen.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="TextButton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

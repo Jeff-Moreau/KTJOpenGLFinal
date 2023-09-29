@@ -5,9 +5,8 @@ PlayScreen::PlayScreen()
 {
 	p_SoundFX = AudioManager::Instance();
 
-    _Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
-    p_BackGroundImage = new Sprite("Assets/Textures/TheBackground.png", _Shader);
-	p_CurtainsImage = new Sprite("Assets/Textures/Curtains.png", _Shader);
+    p_BackGroundImage = new Image("Assets/Textures/TheBackground.png");
+	p_CurtainsImage = new Image("Assets/Textures/Curtains.png");
 
 	_3DShader = Shader("Assets/Shaders/3DTexture.vs", "Assets/Shaders/3DTexture.fs");
 	p_TestBlock = new ModelOBJ("Assets/Textures/testbox.png", _3DShader);
@@ -76,11 +75,11 @@ void PlayScreen::Update()
 void PlayScreen::Render()
 {
     p_BackGroundImage->Render();
-	p_TestBlock->Render();
-	p_Tammy->Draw(_3DShader);
-	p_CurtainsImage->Render();
-    p_Score->RenderText("Score :", 40, 57, 1, glm::vec3(0,0,0));
-	p_ScoreTotal->RenderText(std::to_string(_NewTime), 150, 57, 1, glm::vec3(0, 0, 0));
-    p_Round->RenderText("Round :", 590, 57, 1, glm::vec3(0, 0, 0));
-    p_MainMenu->RenderText("Main Menu", (GraphicsManager::Instance()->SCREEN_WIDTH / 2) - (p_MainMenu->TextWidth / 2), 10, 1, _MainMenuColor);
+	//p_TestBlock->Render();
+	//p_Tammy->Draw(_3DShader);
+	//p_CurtainsImage->Render();
+    //p_Score->RenderText("Score :", 40, 57, 1, glm::vec3(0,0,0));
+	//p_ScoreTotal->RenderText(std::to_string(_NewTime), 150, 57, 1, glm::vec3(0, 0, 0));
+    //p_Round->RenderText("Round :", 590, 57, 1, glm::vec3(0, 0, 0));
+    //p_MainMenu->RenderText("Main Menu", (GraphicsManager::Instance()->SCREEN_WIDTH / 2) - (p_MainMenu->TextWidth / 2), 10, 1, _MainMenuColor);
 }

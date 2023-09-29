@@ -1,11 +1,13 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef IMAGE_H
+#define IMAGE_H
 
 #include <string>
-#include "Shader.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "stb_image.h"
+#include "Shader.h"
 
-class Sprite
+class Image
 {
 private: // MEMBER VARIABLE DECLARATIONS
 	unsigned int _Texture;
@@ -33,13 +35,13 @@ private: // MEMBER CONTAINER DECLARATIONS
 							   };
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
-	Sprite();
-	Sprite(std::string imageName, Shader& shaderToUse); //fullscreen image
-	Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h);
-	~Sprite();
+	Image();
+	Image(std::string imageName); //fullscreen image
+	Image(std::string imageName, float x, float y, float w, float h);
+	~Image();
 
 public: // DOERS
 	void GLSettings();
 	void Render();
 };
-#endif // !SPRITE_H
+#endif // !IMAGE_H

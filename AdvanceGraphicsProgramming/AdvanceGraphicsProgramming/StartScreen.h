@@ -10,7 +10,7 @@ class StartScreen : public Screen
 private: // MEMBER POINTER VARIABLE DECLARATIONS
 	AudioManager* p_SoundFX;
 	InputManager* p_Inputs;
-	Sprite* p_BackGroundImage;
+	Image* p_BackGroundImage;
 	//ModelOBJ* p_TestBlock;
 	Font* p_ExitGame;
 	Font* p_NewGame;

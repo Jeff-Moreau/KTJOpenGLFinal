@@ -9,8 +9,7 @@ StartScreen::StartScreen()
 	p_SoundFX = AudioManager::Instance();
 	p_Inputs = InputManager::Instance();
 
-	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
-	p_BackGroundImage = new Sprite("Assets/Textures/KTJTitleScreen.png", _Shader);
+	p_BackGroundImage = new Image("Assets/Textures/KTJTitleScreen.png");
 
 	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
 	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 24);
@@ -105,6 +104,6 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
-	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
-	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
+	//p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
+	//p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
 }
