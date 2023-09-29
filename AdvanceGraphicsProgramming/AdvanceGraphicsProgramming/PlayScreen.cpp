@@ -24,7 +24,29 @@ PlayScreen::PlayScreen()
 
 PlayScreen::~PlayScreen()
 {
+	delete p_BackGroundImage;
+	p_BackGroundImage = nullptr;
 
+	delete p_CurtainsImage;
+	p_CurtainsImage = nullptr;
+
+	delete p_TestBlock;
+	p_TestBlock = nullptr;
+
+	delete p_Score;
+	p_Score = nullptr;
+
+	delete p_ScoreTotal;
+	p_ScoreTotal = nullptr;
+
+	delete p_Round;
+	p_Round = nullptr;
+
+	delete p_MainMenu;
+	p_MainMenu = nullptr;
+
+	delete p_Tammy;
+	p_Tammy = nullptr;
 }
 
 void PlayScreen::Update()

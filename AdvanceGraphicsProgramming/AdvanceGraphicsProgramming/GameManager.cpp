@@ -15,8 +15,8 @@ GameManager* GameManager::Instance()
 
 GameManager::GameManager()
 {
-	//stbi_set_flip_vertically_on_load(true);
 	_ExitGame = false;
+	stbi_set_flip_vertically_on_load(true);
 	p_GraphicsManager = GraphicsManager::Instance();
 	p_Inputs = InputManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
@@ -29,7 +29,6 @@ GameManager::~GameManager()
 
 void GameManager::Run()
 {
-	// Game Loop
 	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow()))
 	{
 		while (SDL_PollEvent(&_Event))
@@ -66,6 +65,8 @@ void GameManager::LateUpdate()
 
 void GameManager::Render()
 {
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	p_ScreenManager->Render();
 	glfwSwapBuffers(GraphicsManager::Instance()->GetWindow());
 }

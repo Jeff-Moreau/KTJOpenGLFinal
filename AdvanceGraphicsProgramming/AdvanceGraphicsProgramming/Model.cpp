@@ -7,7 +7,6 @@ Model::Model(std::string const& path, bool gamma) : GammaCorrection(gamma)
 
 void Model::Draw(Shader& shader)
 {
-    
     for (unsigned int i = 0; i < Meshes.size(); i++)
     {
         Meshes[i].Draw(shader);

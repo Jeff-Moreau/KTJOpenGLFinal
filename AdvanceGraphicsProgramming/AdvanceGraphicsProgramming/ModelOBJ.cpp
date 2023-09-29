@@ -50,12 +50,10 @@ _Vertices
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 }
 {
-	// MEMBER VARIABLE INSTANTIATION
 	_Shader = shaderToUse;
 
 	GLSettings();
 
-	// LOCAL VARIABLE DECLARATIONS
 	int width;
 	int height;
 	int textureColorChannels;
@@ -63,7 +61,6 @@ _Vertices
 
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
 
-	// Texture error check
 	if (newTexture)
 	{
 		if (textureColorChannels == 3)
@@ -82,7 +79,7 @@ _Vertices
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	stbi_image_free(newTexture);
+	//stbi_image_free(newTexture);
 }
 
 ModelOBJ::ModelOBJ(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h)
@@ -114,11 +111,9 @@ void ModelOBJ::GLSettings()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_Indices), _Indices, GL_STATIC_DRAW);
 
-	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	// texture coord attribute
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
@@ -136,7 +131,7 @@ void ModelOBJ::GLSettings()
 
 void ModelOBJ::Render()
 {
-	//glBindTexture(GL_TEXTURE_2D, _Texture);
+	glBindTexture(GL_TEXTURE_2D, _Texture);
 
 	_Shader.Use();
 

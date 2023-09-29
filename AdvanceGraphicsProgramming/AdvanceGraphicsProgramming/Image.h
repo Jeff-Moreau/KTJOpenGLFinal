@@ -2,8 +2,9 @@
 #define IMAGE_H
 
 #include <string>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "GraphicsManager.h"
+//#include <glad/glad.h>
+//#include <GLFW/glfw3.h>
 #include "stb_image.h"
 #include "Shader.h"
 
@@ -21,13 +22,7 @@ private: // MEMBER VARIABLE DECLARATIONS
 	Shader _Shader;
 
 private: // MEMBER CONTAINER DECLARATIONS
-	float _Vertices[32] = {
-							// positions		// colors			// texture coords
-							1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
-							1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
-							-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
-							-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
-						  };
+	float _Vertices[32];
 
 	unsigned int _Indices[6] = {
 								0, 1, 3,	//first triangle

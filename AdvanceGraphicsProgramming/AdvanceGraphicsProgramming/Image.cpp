@@ -5,7 +5,15 @@ Image::Image()
 
 }
 
-Image::Image(std::string imageName)
+Image::Image(std::string imageName) :
+	_Vertices
+{
+	// positions		// colors			// texture coords
+	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
+	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
+	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
+	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
+}
 {
 	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
 	
@@ -15,7 +23,7 @@ Image::Image(std::string imageName)
 	int height;
 	int textureColorChannels;
 	unsigned char* newTexture = nullptr;
-	stbi_set_flip_vertically_on_load(true);
+
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
 
 	if (newTexture)
@@ -37,8 +45,6 @@ Image::Image(std::string imageName)
 	}
 
 	stbi_image_free(newTexture);
-	_Shader.Use();
-	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
 }
 
 Image::Image(std::string imageName, float x, float y, float w, float h)
@@ -51,7 +57,7 @@ Image::Image(std::string imageName, float x, float y, float w, float h)
 	int height;
 	int colorChannels;
 	unsigned char* newTexture = nullptr;
-	stbi_set_flip_vertically_on_load(true);
+
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &colorChannels, 0);
 
 	if (newTexture)
@@ -72,9 +78,6 @@ Image::Image(std::string imageName, float x, float y, float w, float h)
 	}
 
 	stbi_image_free(newTexture);
-	
-	_Shader.Use(); 
-	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
 }
 
 Image::~Image()
@@ -115,7 +118,7 @@ void Image::GLSettings()
 	glBindTexture(GL_TEXTURE_2D, _Texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 

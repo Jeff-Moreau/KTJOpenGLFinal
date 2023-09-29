@@ -13,10 +13,6 @@ Font::Font(std::string fontName, int pixHeight)
 
 	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
 
-	glm::mat4 screenProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-	_FontShader.Use();
-	glUniformMatrix4fv(glGetUniformLocation(_FontShader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(screenProjection));
-
 	FT_Library fontLibrary;
 	FT_Face fontTypeFace;
 
@@ -63,6 +59,10 @@ Font::Font(std::string fontName, int pixHeight)
 
 	FT_Done_Face(fontTypeFace);
 	FT_Done_FreeType(fontLibrary);
+	
+	glm::mat4 screenProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+	_FontShader.Use();
+	glUniformMatrix4fv(glGetUniformLocation(_FontShader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(screenProjection));
 
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
@@ -73,6 +73,7 @@ Font::Font(std::string fontName, int pixHeight)
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	//glDisable(GL_CULL_FACE);
 }
 
 Vector2 Font::GetFontPosition()
