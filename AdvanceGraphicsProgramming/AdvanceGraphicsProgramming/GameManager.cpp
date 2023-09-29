@@ -53,6 +53,11 @@ void GameManager::Run()
 
 void GameManager::Update()
 {
+	if (glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(GraphicsManager::Instance()->GetWindow(), true);
+	}
+
 	p_Inputs->Update();
 	p_ScreenManager->Update();
 }
@@ -64,8 +69,6 @@ void GameManager::LateUpdate()
 
 void GameManager::Render()
 {
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	p_ScreenManager->Render();
 	glfwSwapBuffers(GraphicsManager::Instance()->GetWindow());
 }

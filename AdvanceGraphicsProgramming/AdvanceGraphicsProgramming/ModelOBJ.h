@@ -30,14 +30,14 @@ private: // MEMBER CONTAINER DECLARATIONS
 
 	glm::vec3 _CubePositions[10] = {
 		glm::vec3(-1.5f,  1.75f,  -10.0f),
-		glm::vec3(-4.0f,  1.75f, -10.0f),
+		glm::vec3(-4.5f,  1.75f, -10.0f),
 		glm::vec3(1.5f, 1.75f, -10.0f),
-		glm::vec3(4.0f, 1.75f, -10.0f),
+		glm::vec3(4.5f, 1.75f, -10.0f),
 		glm::vec3(2.0f, 0.0f, -7.5f),
 		glm::vec3(-2.0f,  0.0f, -7.5f),
 		glm::vec3(0.0f, 0.0, -7.5f),
-		glm::vec3(3.0f,  -1.25f, -5.0f),
-		glm::vec3(-3.0f,  -1.25f, -5.0f),
+		glm::vec3(3.5f,  -1.25f, -5.0f),
+		glm::vec3(-3.5f,  -1.25f, -5.0f),
 		glm::vec3(0.0f,  -1.25f, -5.0f)
 	};
 

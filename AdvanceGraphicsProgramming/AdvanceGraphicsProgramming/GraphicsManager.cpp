@@ -48,7 +48,7 @@ GraphicsManager::GraphicsManager()
 
 		return;
 	}
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST); // CHECK THIS IN A BIT
 }
 
 GraphicsManager::~GraphicsManager()

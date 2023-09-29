@@ -11,6 +11,7 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	AudioManager* p_SoundFX;
 	InputManager* p_Inputs;
 	Sprite* p_BackGroundImage;
+	Sprite* p_CurtainsImage;
 	ModelOBJ* p_TestBlock;
 	Model* p_Tammy;
 	Font* p_MainMenu;

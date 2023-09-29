@@ -2,7 +2,6 @@
 
 Model::Model(std::string const& path, bool gamma) : GammaCorrection(gamma)
 {
-    stbi_set_flip_vertically_on_load(true);
     LoadModel(path);
 }
 
@@ -32,10 +31,8 @@ void Model::LoadModel(std::string const& path)
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
 {
-
     for (unsigned int i = 0; i < node->mNumMeshes; i++)
     {
-
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
         Meshes.push_back(ProcessMesh(mesh, scene));
     }

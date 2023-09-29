@@ -5,30 +5,19 @@ Sprite::Sprite()
 
 }
 
-Sprite::Sprite(std::string imageName, Shader& shaderToUse) :
-_Vertices
+Sprite::Sprite(std::string imageName, Shader& shaderToUse)
 {
-	// positions		// colors			// texture coords
-	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
-	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
-	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
-	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
-}
-{
-	// MEMBER VARIABLE INSTANTIATION
 	_Shader = shaderToUse;
 	
 	GLSettings();
 
-	// LOCAL VARIABLE DECLARATIONS
 	int width;
 	int height;
 	int textureColorChannels;
 	unsigned char* newTexture = nullptr;
-
+	stbi_set_flip_vertically_on_load(true);
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
 
-	// Texture error check
 	if (newTexture)
 	{
 		if (textureColorChannels == 3)
@@ -48,32 +37,24 @@ _Vertices
 	}
 
 	stbi_image_free(newTexture);
+	_Shader.Use();
+	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
+	_Shader.SetInt("texture2", 1);
 }
 
-Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h) :
-	_Vertices
+Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h)
 {
-	// positions		// colors			// texture coords
-	x + w, y, 0.0f,		1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
-	x + w, y - h, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
-	x, y - h, 0.0f,		0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
-	x, y, 0.0f,			1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
-}
-{
-	// MEMBER VARIABLE INSTANTIATION
 	_Shader = shaderToUse;
 
 	GLSettings();
 
-	// LOCAL VARIABLE DECLARATIONS
 	int width;
 	int height;
 	int colorChannels;
 	unsigned char* newTexture = nullptr;
-
+	stbi_set_flip_vertically_on_load(true);
 	newTexture = stbi_load(imageName.c_str(), &width, &height, &colorChannels, 0);
 
-	// Texture error check
 	if (newTexture)
 	{
 		if (colorChannels == 3)
@@ -92,6 +73,10 @@ Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, flo
 	}
 
 	stbi_image_free(newTexture);
+	
+	_Shader.Use(); 
+	glUniform1i(glGetUniformLocation(_Shader.ID, "texture1"), 0);
+	_Shader.SetInt("texture2", 1);
 }
 
 Sprite::~Sprite()
@@ -103,12 +88,10 @@ Sprite::~Sprite()
 
 void Sprite::GLSettings()
 {
-	//glEnable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
 	glGenBuffers(1, &_EBO);
+
 	glBindVertexArray(_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
@@ -117,15 +100,12 @@ void Sprite::GLSettings()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_Indices), _Indices, GL_STATIC_DRAW);
 
-	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	// color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	// texture coord attribute
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
@@ -137,13 +117,12 @@ void Sprite::GLSettings()
 	glBindTexture(GL_TEXTURE_2D, _Texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 void Sprite::Render()
 {
-	glDepthMask(GL_FALSE);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _Texture);
 	_Shader.Use();

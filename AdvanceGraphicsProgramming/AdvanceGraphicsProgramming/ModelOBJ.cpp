@@ -139,7 +139,7 @@ void ModelOBJ::Render()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _Texture);
 	_Shader.Use();
-	//glBindVertexArray(_VAO);
+	glBindVertexArray(_VAO);
 	// create transformations
 	glm::mat4 view = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 	glm::mat4 projection = glm::mat4(1.0f);
