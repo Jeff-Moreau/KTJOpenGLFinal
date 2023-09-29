@@ -41,5 +41,5 @@ private:
     vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
 };
 
-unsigned int TextureFromFile(const char* path, const string& directory, bool gamma);
+unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
 #endif // !MODEL_H

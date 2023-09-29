@@ -8,14 +8,12 @@ PlayScreen::PlayScreen()
     p_BackGroundImage = new Image("Assets/Textures/TheBackground.png");
 	p_CurtainsImage = new Image("Assets/Textures/Curtains.png");
 
-	_3DShader = Shader("Assets/Shaders/3DTexture.vs", "Assets/Shaders/3DTexture.fs");
-	p_TestBlock = new ModelOBJ("Assets/Textures/testbox.png", _3DShader);
-
     p_Score = new Font("Assets/Fonts/Starjedi.ttf", 24);
 	p_ScoreTotal = new Font("Assets/Fonts/Starjedi.ttf", 24);
     p_Round = new Font("Assets/Fonts/Starjedi.ttf", 24);
     p_MainMenu = new Font("Assets/Fonts/Starjedi.ttf", 32);
 
+	//_3DShader = Shader("Assets/Shaders/3DTexture.vs", "Assets/Shaders/3DTexture.fs");
 	p_Tammy = new Model("Assets/Models/CubeJarJar.obj");
 	_TimerReset = true;
 	_Time = 0;
@@ -29,9 +27,6 @@ PlayScreen::~PlayScreen()
 
 	delete p_CurtainsImage;
 	p_CurtainsImage = nullptr;
-
-	delete p_TestBlock;
-	p_TestBlock = nullptr;
 
 	delete p_Score;
 	p_Score = nullptr;
@@ -96,8 +91,7 @@ void PlayScreen::Update()
 void PlayScreen::Render()
 {
     p_BackGroundImage->Render();
-	p_TestBlock->Render();
-	p_Tammy->Draw(_3DShader);
+	//p_Tammy->Draw(_3DShader);
 	p_CurtainsImage->Render();
     p_Score->RenderText("Score :", 40, 57, 1, glm::vec3(0,0,0));
 	p_ScoreTotal->RenderText(std::to_string(_NewTime), 150, 57, 1, glm::vec3(0, 0, 0));

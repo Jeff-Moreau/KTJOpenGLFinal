@@ -2,6 +2,7 @@
 #define PLAY_SCREEN_H
 
 #include "Screen.h"
+#include "Shader.h"
 
 using namespace SDLFramework;
 
@@ -12,7 +13,6 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	InputManager* p_Inputs;
 	Image* p_BackGroundImage;
 	Image* p_CurtainsImage;
-	ModelOBJ* p_TestBlock;
 	Model* p_Tammy;
 	Font* p_MainMenu;
 	Font* p_Score;
@@ -22,9 +22,9 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	bool _HoverMainMenu;
 
 private: // MEMBER VARIABLE DECLARATIONS
-	Shader _3DShader;
-	Shader _Shader;
-	Shader _FontShader;
+	//Shader _3DShader;
+	//Shader _Shader;
+	//Shader _FontShader;
 	bool _TimerReset;
 	float _Time;
 	int _NewTime;

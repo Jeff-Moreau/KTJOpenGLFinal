@@ -146,7 +146,6 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ModelOBJ.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -165,7 +164,6 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="ModelOBJ.h" />
     <ClInclude Include="PlayScreen.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenManager.h" />

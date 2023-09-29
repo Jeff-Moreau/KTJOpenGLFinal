@@ -3,13 +3,13 @@
 
 #include "AudioManager.h"
 #include "GraphicsManager.h"
-#include "ModelOBJ.h"
 #include "Model.h"
 #include "InputManager.h"
 #include "Image.h"
 #include "Font.h"
 #include "glm/glm.hpp"
 #include "GLFW/glfw3.h"
+#include "Shader.h"
 #include <cmath>
 #include <iostream>
 

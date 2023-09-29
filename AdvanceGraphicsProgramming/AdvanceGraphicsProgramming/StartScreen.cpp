@@ -6,6 +6,7 @@ StartScreen::StartScreen()
 	_HoverExitGame = false;
 	_HoverNewGame = false;
 
+
 	p_SoundFX = AudioManager::Instance();
 	p_Inputs = InputManager::Instance();
 
@@ -33,7 +34,7 @@ void StartScreen::Update()
 	int keystate = glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_ENTER);
 	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
 	{
-		std::cout << "I pressed E" << std::endl;;
+		std::cout << "pressed Enter" << std::endl;;
 	}
 	laststate = keystate;*/
 	
