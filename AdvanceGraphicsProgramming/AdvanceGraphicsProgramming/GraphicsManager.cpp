@@ -1,57 +1,81 @@
 #include "GraphicsManager.h"
+namespace SDLFramework
+{
+GraphicsManager* GraphicsManager::p_ThisInstance = nullptr;
 
-GraphicsManager* GraphicsManager::sInstance = nullptr;
-
-GraphicsManager* GraphicsManager::Instance() {
-	if (sInstance == nullptr) {
-		sInstance = new GraphicsManager();
+// SINGLETON START
+GraphicsManager* GraphicsManager::Instance()
+{
+	if (p_ThisInstance == nullptr)
+	{
+		p_ThisInstance = new GraphicsManager();
 	}
 
-	return sInstance;
+	return p_ThisInstance;
 }
+// SINGLETON END
 
-void GraphicsManager::Release() {
-	delete sInstance;
-	sInstance = nullptr;
-	//glfwTerminate();
-}
-
-GraphicsManager::GraphicsManager() {
+GraphicsManager::GraphicsManager()
+{
+	if (SDL_Init(SDL_INIT_EVENTS) < 0)
+	{
+		std::cerr << std::endl << "Something went wrong, cannot initialize SDL!" << std::endl;
+		std::cerr << "SDL Error : " << SDL_GetError() << std::endl;
+	}
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	pWindow = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", nullptr, nullptr);
+	// MEMBER VARIABLE INSTANTIATION
+	p_GameWindow = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Jarjar Drinks - Ken, Tammy, Jeff", nullptr, nullptr);
+	
+	
 
-	if (pWindow == nullptr) {
+	if (p_GameWindow == nullptr)
+	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
+
 		return;
 	}
-	glfwMakeContextCurrent(pWindow);
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+	glfwMakeContextCurrent(p_GameWindow);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
+
 		return;
 	}
 
-	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
-
-	//glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	//glEnable(GL_DEPTH_TEST); // Text showing issues were right here may be a problem
+	//glEnable(GL_CULL_FACE); // same text issues here
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-GraphicsManager::~GraphicsManager() {
+GraphicsManager::~GraphicsManager()
+{
 	glfwTerminate();
 }
 
-void GraphicsManager::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
+GLFWwindow* GraphicsManager::GetWindow()
+{ 
+	return p_GameWindow;
+}
+
+void GraphicsManager::FramebufferSizeCallback(GLFWwindow* gameWindow, int width, int height)
+{
 	glViewport(0, 0, width, height);
 }
 
-GLFWwindow* GraphicsManager::GetWindow() { return pWindow; }
+void GraphicsManager::Release()
+{
+	delete p_ThisInstance;
+	p_ThisInstance = nullptr;
+}
+}

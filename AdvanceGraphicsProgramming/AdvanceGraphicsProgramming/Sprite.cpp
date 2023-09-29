@@ -1,7 +1,13 @@
 #include "Sprite.h"
 
-Sprite::Sprite(std::string filename, Shader& aShader) :
-	vertices{
+Sprite::Sprite()
+{
+
+}
+
+Sprite::Sprite(std::string imageName, Shader& shaderToUse) :
+_Vertices
+{
 	// positions		// colors			// texture coords
 	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
 	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
@@ -9,34 +15,44 @@ Sprite::Sprite(std::string filename, Shader& aShader) :
 	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
 }
 {
-	shader = aShader;
+	// MEMBER VARIABLE INSTANTIATION
+	_Shader = shaderToUse;
 	
 	GLSettings();
 
-	int width, height, nrChannels;
-	unsigned char* data = nullptr;
-	data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+	// LOCAL VARIABLE DECLARATIONS
+	int width;
+	int height;
+	int textureColorChannels;
+	unsigned char* newTexture = nullptr;
+
+	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
 
 	// Texture error check
-	if (data) {
-		if (nrChannels == 3) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	if (newTexture)
+	{
+		if (textureColorChannels == 3)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, newTexture);
 		}
-		else if (nrChannels == 4) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		else if (textureColorChannels == 4)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, newTexture);
 		}
 		
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	else {
+	else
+	{
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	stbi_image_free(data);
+	stbi_image_free(newTexture);
 }
 
-Sprite::Sprite(std::string filename, Shader& aShader, float x, float y, float w, float h) :
-	vertices{
+Sprite::Sprite(std::string imageName, Shader& shaderToUse, float x, float y, float w, float h) :
+	_Vertices
+{
 	// positions		// colors			// texture coords
 	x + w, y, 0.0f,		1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
 	x + w, y - h, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
@@ -44,48 +60,59 @@ Sprite::Sprite(std::string filename, Shader& aShader, float x, float y, float w,
 	x, y, 0.0f,			1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
 }
 {
-	shader = aShader;
+	// MEMBER VARIABLE INSTANTIATION
+	_Shader = shaderToUse;
 
 	GLSettings();
 
-	int width, height, nrChannels;
-	unsigned char* data = nullptr;
-	data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+	// LOCAL VARIABLE DECLARATIONS
+	int width;
+	int height;
+	int colorChannels;
+	unsigned char* newTexture = nullptr;
+
+	newTexture = stbi_load(imageName.c_str(), &width, &height, &colorChannels, 0);
 
 	// Texture error check
-	if (data) {
-		if (nrChannels == 3) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	if (newTexture)
+	{
+		if (colorChannels == 3)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, newTexture);
 		}
-		else if (nrChannels == 4) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		else if (colorChannels == 4)
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, newTexture);
 		}
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	else {
+	else
+	{
 		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	stbi_image_free(data);
+	stbi_image_free(newTexture);
 }
 
-Sprite::~Sprite() {
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+Sprite::~Sprite()
+{
+	glDeleteVertexArrays(1, &_VAO);
+	glDeleteBuffers(1, &_VBO);
+	glDeleteBuffers(1, &_EBO);
 }
 
-void Sprite::GLSettings() {
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	glBindVertexArray(VAO);
+void Sprite::GLSettings()
+{
+	glGenVertexArrays(1, &_VAO);
+	glGenBuffers(1, &_VBO);
+	glGenBuffers(1, &_EBO);
+	glBindVertexArray(_VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, _VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(_Vertices), _Vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_Indices), _Indices, GL_STATIC_DRAW);
 
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -103,18 +130,19 @@ void Sprite::GLSettings() {
 
 	glBindVertexArray(0);
 
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
+	glGenTextures(1, &_Texture);
+	glBindTexture(GL_TEXTURE_2D, _Texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void Sprite::Render() {
+void Sprite::Render()
+{
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	shader.Use();
-	glBindVertexArray(VAO);
+	glBindTexture(GL_TEXTURE_2D, _Texture);
+	_Shader.Use();
+	glBindVertexArray(_VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

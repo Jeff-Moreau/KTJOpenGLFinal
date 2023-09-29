@@ -1,53 +1,77 @@
 #include "GameManager.h"
 
-GameManager* GameManager::sInstance = nullptr;
-
-GameManager* GameManager::Instance() {
-	if (sInstance == nullptr) {
-		sInstance = new GameManager();
+GameManager* GameManager::p_ThisInstance = nullptr;
+// SINGLETON START
+GameManager* GameManager::Instance()
+{
+	if (p_ThisInstance == nullptr)
+	{
+		p_ThisInstance = new GameManager();
 	}
 
-	return sInstance;
+	return p_ThisInstance;
 }
+// SINGLETON END
 
-void GameManager::Release() {
-	delete sInstance;
-	sInstance = nullptr;
-}
 
-GameManager::GameManager() {
+GameManager::GameManager()
+{
 	stbi_set_flip_vertically_on_load(true);
-	pGraphics = GraphicsManager::Instance();
-	pScreenManager = ScreenManager::Instance();
+	_ExitGame = false;
+	// MEMBER POINTER VARIABLE INSTANTIATION
+	p_GraphicsManager = GraphicsManager::Instance();
+	p_Inputs = InputManager::Instance();
+	p_ScreenManager = ScreenManager::Instance();
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
 
-GameManager::~GameManager() {
+GameManager::~GameManager()
+{
 	GraphicsManager::Release();
 }
 
-void GameManager::Run() {
+void GameManager::Run()
+{
 	// Game Loop
-	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow())) {
+	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow()))
+	{
+		while (SDL_PollEvent(&_Event))
+		{
+			switch (_Event.type)
+			{
+			case SDL_QUIT:
+				_ExitGame = true;
+				break;
+			}
+		}
 		Update();
 		LateUpdate();
 		Render();
-
 		glfwPollEvents();
 	}
 }
 
-void GameManager::Update() {
-	pScreenManager->Update();
+void GameManager::Update()
+{
+	p_Inputs->Update();
+	p_ScreenManager->Update();
 }
 
-void GameManager::LateUpdate() {
-
+void GameManager::LateUpdate()
+{
+	p_Inputs->UpdatePrevInput();
 }
 
-void GameManager::Render() {
+void GameManager::Render()
+{
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	pScreenManager->Render();
+	p_ScreenManager->Render();
 	glfwSwapBuffers(GraphicsManager::Instance()->GetWindow());
+}
+
+void GameManager::Release()
+{
+	delete p_ThisInstance;
+	p_ThisInstance = nullptr;
 }

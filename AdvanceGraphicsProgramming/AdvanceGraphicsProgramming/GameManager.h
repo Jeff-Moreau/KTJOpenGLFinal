@@ -1,35 +1,46 @@
-#ifndef GAMEMANAGER_H
-#define GAMEMANAGER_H
+#ifndef GAME_MANAGER_H
+#define GAME_MANAGER_H
 
 #include "GraphicsManager.h"
 #include "ScreenManager.h"
+#include "InputManager.h"
 #include "Shader.h"
 #include "Sprite.h"
 #include "Camera.h"
 
 class GameManager
 {
-private:
-	static GameManager* sInstance;
+private: // MEMBER POINTER VARIABLE DECLARATIONS
+	GraphicsManager* p_GraphicsManager;
+	ScreenManager* p_ScreenManager;
+	InputManager* p_Inputs;
 
-	GraphicsManager* pGraphics;
-	ScreenManager* pScreenManager;
-	Camera camera;
+private: // MEMBER VARIABLE DECLARATIONS
+	Camera _Camera;
+	glm::vec3 _CameraPos;
+	glm::vec3 _CameraFront;
+	glm::vec3 _CameraUp;
 
-	glm::vec3 cameraPos;
-	glm::vec3 cameraFront;
-	glm::vec3 cameraUp;
+	bool _ExitGame;
+	SDL_Event _Event;
 
-public:
+private: // SINGLETON
+	static GameManager* p_ThisInstance;
+
+public: // SINGLETON
 	static GameManager* Instance();
-	static void Release();
 
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	GameManager();
+	~GameManager();
+
+public: // DOERS
 	void Run();
 	void Update();
 	void LateUpdate();
 	void Render();
 
-	GameManager();
-	~GameManager();
+public: // CLEANUP
+	static void Release();
 };
-#endif // !GAMEMANAGER_H
+#endif // !GAME_MANAGER_H

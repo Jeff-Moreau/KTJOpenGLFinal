@@ -57,13 +57,16 @@
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="AudioManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="TextButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,13 +107,16 @@
     <ClInclude Include="MathHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="AudioManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
+    <ClInclude Include="TextButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

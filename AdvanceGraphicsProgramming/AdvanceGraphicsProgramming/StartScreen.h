@@ -1,22 +1,34 @@
-#pragma once
+#ifndef START_SCREEN_H
+#define START_SCREEN_H
+
 #include "Screen.h"
-#include "Sprite.h"
-#include "Font.h"
-#include "glm/glm.hpp"
+
+using namespace SDLFramework;
 
 class StartScreen : public Screen
 {
-private:
-	Sprite* background;
-	Shader shader;
-	Shader fontShader;
-	Font* testFont;
+private: // MEMBER POINTER VARIABLE DECLARATIONS
+	AudioManager* p_SoundFX;
+	InputManager* p_Inputs;
+	Sprite* p_BackGroundImage;
+	Font* p_ExitGame;
+	Font* p_NewGame;
 
-public:
+private: // MEMBER VARIABLE DECLARATIONS
+	Shader _Shader;
+	Shader _FontShader;
+	glm::vec3 _ExitColor;
+	glm::vec3 _StartColor;
+	bool _HoverExitGame;
+	bool _HoverNewGame;
+	int _HoverNewGameSound;
+
+public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	StartScreen();
 	~StartScreen();
 
+public: // DOERS
 	void Update();
 	void Render();
 };
-
+#endif // !START_SCREEN_H

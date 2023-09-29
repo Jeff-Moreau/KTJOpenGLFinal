@@ -1,36 +1,53 @@
 #include "ScreenManager.h"
 
-ScreenManager* ScreenManager::sInstance = nullptr;
+ScreenManager* ScreenManager::p_ThisInstance = nullptr;
 
-ScreenManager* ScreenManager::Instance() {
-	if (sInstance == nullptr) {
-		sInstance = new ScreenManager();
+// SINGLETON START
+ScreenManager* ScreenManager::Instance()
+{
+	if (p_ThisInstance == nullptr)
+	{
+		p_ThisInstance = new ScreenManager();
 	}
 
-	return sInstance;
+	return p_ThisInstance;
+}
+// SINGLETON END
+
+ScreenManager::ScreenManager()
+{
+	// MEMBER VARIABLE AND CONTAINERS INSTANTIATION
+	p_Screens.push_back(new StartScreen());
+	p_Screens.push_back(new PlayScreen());
+	_CurrentScreen = Start;
 }
 
-void ScreenManager::Release() {
-	delete sInstance;
-	sInstance = nullptr;
-}
-
-ScreenManager::ScreenManager() {
-	m_pScreens.push_back(new StartScreen());
-	mCurrentScreen = Start;
-}
-
-ScreenManager::~ScreenManager() {
-	for (int i = 0; i < m_pScreens.size(); i++) {
-		delete m_pScreens[i];
-		m_pScreens[i] = nullptr;
+ScreenManager::~ScreenManager()
+{
+	for (int i = 0; i < p_Screens.size(); i++)
+	{
+		delete p_Screens[i];
+		p_Screens[i] = nullptr;
 	}
 }
 
-void ScreenManager::Update() {
-	m_pScreens[(int)mCurrentScreen]->Update();
+void ScreenManager::SetCurrentScreen(Screens newScreen)
+{
+	_CurrentScreen = newScreen;
 }
 
-void ScreenManager::Render() {
-	m_pScreens[(int)mCurrentScreen]->Render();
+void ScreenManager::Update()
+{
+	p_Screens[(int)_CurrentScreen]->Update();
+}
+
+void ScreenManager::Render()
+{
+	p_Screens[(int)_CurrentScreen]->Render();
+}
+
+void ScreenManager::Release()
+{
+	delete p_ThisInstance;
+	p_ThisInstance = nullptr;
 }

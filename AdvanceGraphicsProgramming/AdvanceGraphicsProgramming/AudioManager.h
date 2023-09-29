@@ -1,27 +1,36 @@
-#ifndef _AUDIOMANAGER_H
-#define _AUDIOMANAGER_H
+#ifndef AUDIO_MANAGER_H
+#define AUDIO_MANAGER_H
 
-#include <SDL2/SDL.h>
-#include <vector>
-#include <string>
+#include "AssetManager.h"
 
-class AudioManager {
-public:
-	AudioManager();
-	~AudioManager();
+namespace SDLFramework
+{
+	class AudioManager
+	{
+	private: // MEMBER POINTER VARIABLES
+		AssetManager* m_pAssetManager;
 
-	bool Initialize();
-	void Shutdown();
+	private: // SINGLETON
+		static AudioManager* p_Instance;
 
-	bool LoadSound(const std::string& soundPath);
-	void PlaySound(int soundIndex, int volume = 128);
-	void StopAllSounds();
+	public: // SINGLETON
+		static AudioManager* Instance();
 
-private:
-	SDL_AudioDeviceID audioDevice;
-	std::vector<SDL_AudioSpec> soundSpecs;
-	std::vector<Uint8*> soundBuffers;
-};
+	private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+		AudioManager();
+		~AudioManager();
 
+	public: // DOERS
+		void PlayMusic(std::string filename, int loops = -1);
+		void PauseMusic();
+		void ResumeMusic();
+		void StopMusic();
 
-#endif
+	public: // DOERS
+		void PlaySFX(std::string filename, int loops = 0, int channel = -1);
+
+	public: // CLEANUP
+		static void Release();
+	};
+}
+#endif // !AUDIO_MANAGER_H
