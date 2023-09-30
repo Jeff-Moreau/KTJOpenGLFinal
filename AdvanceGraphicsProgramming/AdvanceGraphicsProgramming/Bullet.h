@@ -14,9 +14,4 @@ private:
     glm::vec3 position;
     glm::mat4 model;
 };
-
-class Bullet
-{
-};
-
 #endif
