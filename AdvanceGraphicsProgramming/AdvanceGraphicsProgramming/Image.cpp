@@ -5,7 +5,7 @@ Image::Image()
 
 }
 
-Image::Image(std::string imageName) :
+Image::Image(std::string imageName, Shader& shader) :
 	_Vertices
 {
 	// positions		// colors			// texture coords
@@ -15,7 +15,7 @@ Image::Image(std::string imageName) :
 	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
 }
 {
-	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
+	_Shader = shader;
 	
 	GLSettings();
 
@@ -47,9 +47,17 @@ Image::Image(std::string imageName) :
 	stbi_image_free(newTexture);
 }
 
-Image::Image(std::string imageName, float x, float y, float w, float h)
+Image::Image(std::string imageName, Shader& shader, float x, float y, float w, float h) :
+	_Vertices
 {
-	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
+	// positions		// colors			// texture coords
+	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
+	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
+	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
+	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
+}
+{
+	_Shader = shader;
 
 	GLSettings();
 

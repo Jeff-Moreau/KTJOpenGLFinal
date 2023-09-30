@@ -6,14 +6,12 @@ StartScreen::StartScreen()
 	_HoverExitGame = false;
 	_HoverNewGame = false;
 
-
 	p_SoundFX = AudioManager::Instance();
-	p_Inputs = InputManager::Instance();
 
-	p_BackGroundImage = new Image("Assets/Textures/KTJTitleScreen.png");
+	p_BackGroundImage = new Image("Assets/Textures/KTJTitleScreen.png", GraphicsManager::Instance()->TextureShader);
 
-	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", 24);
-	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", 32);
+	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", 24, GraphicsManager::Instance()->FontShader);
+	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", 32, GraphicsManager::Instance()->FontShader);
 }
 
 StartScreen::~StartScreen()
@@ -104,6 +102,7 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
+
 	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
 	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
 }

@@ -13,6 +13,27 @@ void Model::Draw(Shader& shader)
     }
 }
 
+void Model::SetPosition(glm::vec3 position)
+{
+    glm::mat4 Position = glm::mat4(1.0f);
+    Position = glm::translate(Position, position);
+    GraphicsManager::Instance()->ModelShader.setMat4("view", Position);
+}
+
+void Model::SetRotation(float angle, glm::vec3 axis)
+{
+    glm::mat4 Rotation = glm::mat4(1.0f);
+    Rotation = glm::rotate(Rotation, glm::radians(angle), axis);
+    GraphicsManager::Instance()->ModelShader.setMat4("model", Rotation);
+}
+
+void Model::SetPerspective(float fov)
+{
+    glm::mat4 Perspective = glm::mat4(1.0f);
+    Perspective = glm::perspective(glm::radians(fov), (float)GraphicsManager::Instance()->SCREEN_WIDTH / (float)GraphicsManager::Instance()->SCREEN_HEIGHT, 0.1f, 100.0f);
+    GraphicsManager::Instance()->ModelShader.setMat4("projection", Perspective);
+}
+
 void Model::LoadModel(std::string const& path)
 {
     Assimp::Importer importer;

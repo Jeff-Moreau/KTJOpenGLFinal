@@ -46,11 +46,16 @@ namespace SDLFramework
 	
 			return;
 		}
-		glEnable(GL_DEPTH_TEST);
-		/*glCullFace(GL_BACK);
+
+		TextureShader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
+		FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
+		ModelShader = Shader("Assets/Shaders/3DTexture.vs", "Assets/Shaders/3DTexture.fs");
+
+		//glEnable(GL_DEPTH_TEST);
+		glCullFace(GL_BACK);
 		glFrontFace(GL_CCW);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
 	GraphicsManager::~GraphicsManager()

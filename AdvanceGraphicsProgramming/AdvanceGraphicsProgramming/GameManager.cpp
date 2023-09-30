@@ -16,9 +16,10 @@ GameManager* GameManager::Instance()
 GameManager::GameManager()
 {
 	_ExitGame = false;
+
 	stbi_set_flip_vertically_on_load(true);
+
 	p_GraphicsManager = GraphicsManager::Instance();
-	p_Inputs = InputManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
 }
 
@@ -54,13 +55,12 @@ void GameManager::Update()
 		glfwSetWindowShouldClose(GraphicsManager::Instance()->GetWindow(), true);
 	}
 
-	p_Inputs->Update();
 	p_ScreenManager->Update();
 }
 
 void GameManager::LateUpdate()
 {
-	p_Inputs->UpdatePrevInput();
+
 }
 
 void GameManager::Render()

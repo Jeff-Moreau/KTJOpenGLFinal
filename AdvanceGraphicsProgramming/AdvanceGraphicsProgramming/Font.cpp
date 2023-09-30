@@ -5,13 +5,9 @@ Font::Font()
 	_TotalCharacters = 0;
 }
 
-Font::Font(std::string fontName, int pixHeight)
+Font::Font(std::string fontName, int pixHeight, Shader shader)
 {
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
+	_FontShader = shader;
 
 	FT_Library fontLibrary;
 	FT_Face fontTypeFace;

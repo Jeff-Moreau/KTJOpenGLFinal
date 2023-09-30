@@ -31,8 +31,8 @@ private: // MEMBER CONTAINER DECLARATIONS
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Image();
-	Image(std::string imageName); //fullscreen image
-	Image(std::string imageName, float x, float y, float w, float h);
+	Image(std::string imageName, Shader& shader); //fullscreen image
+	Image(std::string imageName, Shader& shader, float x, float y, float w, float h);
 	~Image();
 
 public: // DOERS

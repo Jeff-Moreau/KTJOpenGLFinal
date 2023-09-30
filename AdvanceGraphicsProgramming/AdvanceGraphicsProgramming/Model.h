@@ -12,6 +12,7 @@
 
 #include <learnopengl/mesh.h>
 #include "Shader.h"
+#include "GraphicsManager.h"
 
 #include <string>
 #include <fstream>
@@ -19,6 +20,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+
+using namespace SDLFramework;
 
 class Model
 {
@@ -33,6 +36,9 @@ public:
 
 public:
     void Draw(Shader& shader);
+    void SetPosition(glm::vec3 position);
+    void SetRotation(float angle, glm::vec3 axis);
+    void SetPerspective(float fov);
 
 private:
     void LoadModel(std::string const &path);

@@ -2,6 +2,7 @@
 #define START_SCREEN_H
 
 #include "Screen.h"
+#include "Shader.h"
 
 using namespace SDLFramework;
 
@@ -9,7 +10,6 @@ class StartScreen : public Screen
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
 	AudioManager* p_SoundFX;
-	InputManager* p_Inputs;
 	Image* p_BackGroundImage;
 	Font* p_ExitGame;
 	Font* p_NewGame;
