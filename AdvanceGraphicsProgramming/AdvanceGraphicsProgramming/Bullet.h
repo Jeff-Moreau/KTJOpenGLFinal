@@ -15,4 +15,8 @@ private:
     glm::mat4 model;
 };
 
+class Bullet
+{
+};
+
 #endif

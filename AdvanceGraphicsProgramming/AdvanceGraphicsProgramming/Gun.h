@@ -16,4 +16,8 @@ private:
     glm::mat4 model;
 };
 
+class Gun
+{
+};
+
 #endif
