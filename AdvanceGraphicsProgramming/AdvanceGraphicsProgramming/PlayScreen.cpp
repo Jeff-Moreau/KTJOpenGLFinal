@@ -104,6 +104,27 @@ void PlayScreen::Update()
 		_NewTime = 0;
 		std::cout << "Main Menu" << std::endl;
 	}
+
+	static int laststate = GLFW_PRESS;
+	int keystate = glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_K);
+	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
+	{
+		for (int i = 0; i < p_JarJarHeadsRowOne.size(); i++)
+		{
+			p_JarJarHeadsRowOne.erase(p_JarJarHeadsRowOne.begin());
+		}
+	}
+	laststate = keystate;
+
+	/*keystate = glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_A);
+	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
+	{
+		if (p_JarJarHeadsRowOne.size() <= 5)
+		{
+			p_JarJarHeadsRowOne.push_back(new Model("Assets/Models/CubeJarJar.obj"));
+		}
+	}
+	laststate = keystate;*/
 }
 
 void PlayScreen::Render()
@@ -133,8 +154,9 @@ void PlayScreen::Render()
 		p_JarJarHeadsRowOne[i]->Draw(GraphicsManager::Instance()->ModelShader);
 		first = false;
 	}
-
-	newPosition = -7.5f;
+	
+	first = true;
+	newPosition = -3.5f;
 	for (int i = 0; i < p_JarJarHeadsRowTwo.size(); i++)
 	{
 		p_JarJarHeadsRowTwo[i]->SetPerspective(45);
@@ -151,7 +173,8 @@ void PlayScreen::Render()
 		first = false;
 	}
 
-	newPosition = -7.0f;
+	first = true;
+	newPosition = -4.0f;
 	for (int i = 0; i < p_JarJarHeadsRowThree.size(); i++)
 	{
 		p_JarJarHeadsRowThree[i]->SetPerspective(45);

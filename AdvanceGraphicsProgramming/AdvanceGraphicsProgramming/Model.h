@@ -31,6 +31,12 @@ public:
     std::string Location;
     bool GammaCorrection;
 
+private:
+    glm::vec3 _Position;
+    float _XPos;
+    float _YPos;
+    float _ZPos;
+
 public:
     Model(std::string const &path, bool gamma = false);
 
@@ -39,6 +45,7 @@ public:
     void SetPosition(glm::vec3 position);
     void SetRotation(float angle, glm::vec3 axis);
     void SetPerspective(float fov);
+    glm::vec3 GetPosition();
 
 private:
     void LoadModel(std::string const &path);
