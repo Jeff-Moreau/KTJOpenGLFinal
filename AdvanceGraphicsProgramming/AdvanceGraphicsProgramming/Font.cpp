@@ -8,7 +8,7 @@ Font::Font()
 Font::Font(std::string fontName, int pixHeight, Shader shader)
 {
 	_FontShader = shader;
-
+	std::string directory = "Assets/Fonts/" + fontName;
 	FT_Library fontLibrary;
 	FT_Face fontTypeFace;
 
@@ -18,7 +18,7 @@ Font::Font(std::string fontName, int pixHeight, Shader shader)
 		return;
 	}
 
-	if (FT_New_Face(fontLibrary, fontName.c_str(), 0, &fontTypeFace))
+	if (FT_New_Face(fontLibrary, directory.c_str(), 0, &fontTypeFace))
 	{
 		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 		return;

@@ -5,13 +5,13 @@ PlayScreen::PlayScreen()
 {
 	p_SoundFX = AudioManager::Load();
 
-    p_BackGroundImage = new Image("Assets/Textures/TheBackground.png", GraphicsManager::Load()->TextureShader);
-	p_CurtainsImage = new Image("Assets/Textures/Curtains.png", GraphicsManager::Load()->TextureShader);
+    p_BackGroundImage = new Image("TheBackground.png", GraphicsManager::Load()->TextureShader);
+	p_CurtainsImage = new Image("Curtains.png", GraphicsManager::Load()->TextureShader);
 
-    p_Score = new Font("Assets/Fonts/Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-	p_ScoreTotal = new Font("Assets/Fonts/Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-    p_Round = new Font("Assets/Fonts/Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-    p_MainMenu = new Font("Assets/Fonts/Starjedi.ttf", 32, GraphicsManager::Load()->FontShader);
+    p_Score = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
+	p_ScoreTotal = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
+    p_Round = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
+    p_MainMenu = new Font("Starjedi.ttf", 32, GraphicsManager::Load()->FontShader);
 
 	for (int i = 0; i < 4; i++)
 	{

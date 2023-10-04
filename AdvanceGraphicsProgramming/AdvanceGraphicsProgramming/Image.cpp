@@ -10,13 +10,13 @@ Image::Image(std::string imageName, Shader& shader)
 	_Shader = shader;
 	
 	GLSettings();
-
+	std::string directory = "Assets/Textures/" + imageName;
 	int width;
 	int height;
 	int textureColorChannels;
 	unsigned char* newTexture = nullptr;
 
-	newTexture = stbi_load(imageName.c_str(), &width, &height, &textureColorChannels, 0);
+	newTexture = stbi_load(directory.c_str(), &width, &height, &textureColorChannels, 0);
 
 	if (newTexture)
 	{
@@ -44,13 +44,13 @@ Image::Image(std::string imageName, Shader& shader, float x, float y, float w, f
 	_Shader = shader;
 
 	GLSettings();
-
+	std::string directory = "Assets/Textures/" + imageName;
 	int width;
 	int height;
 	int colorChannels;
 	unsigned char* newTexture = nullptr;
 
-	newTexture = stbi_load(imageName.c_str(), &width, &height, &colorChannels, 0);
+	newTexture = stbi_load(directory.c_str(), &width, &height, &colorChannels, 0);
 
 	if (newTexture)
 	{
