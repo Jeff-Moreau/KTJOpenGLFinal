@@ -2,10 +2,9 @@
 
 namespace SDLFramework
 {
-	// Singleton Setup to ensure only One Instance of AssetManager is in Memory
 	AssetManager* AssetManager::p_Instance = nullptr;
 
-	AssetManager* AssetManager::Instance()
+	AssetManager* AssetManager::Load()
 	{
 		if (p_Instance == nullptr)
 		{
@@ -14,7 +13,6 @@ namespace SDLFramework
 
 		return p_Instance;
 	}
-	// Singleton Setup stops here.
 
 	AssetManager::AssetManager()
 	{
@@ -106,7 +104,7 @@ namespace SDLFramework
 		}
 	}
 
-	void AssetManager::Release()
+	void AssetManager::UnLoad()
 	{
 		delete p_Instance;
 		p_Instance = nullptr;

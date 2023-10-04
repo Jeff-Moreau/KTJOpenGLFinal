@@ -2,10 +2,9 @@
 
 namespace SDLFramework
 {
-	// Singleton Setup to ensure only One Instance of AudioManager is in Memory
 	AudioManager* AudioManager::p_Instance = nullptr;
 
-	AudioManager* AudioManager::Instance()
+	AudioManager* AudioManager::Load()
 	{
 		if (p_Instance == nullptr)
 		{
@@ -14,11 +13,10 @@ namespace SDLFramework
 
 		return p_Instance;
 	}
-	// Singleton Setup stops here.
 
 	AudioManager::AudioManager()
 	{
-		m_pAssetManager = AssetManager::Instance();
+		m_pAssetManager = AssetManager::Load();
 
 		if (SDL_Init(SDL_INIT_AUDIO) < 0)
 		{
@@ -38,6 +36,11 @@ namespace SDLFramework
 		m_pAssetManager = nullptr;
 		Mix_CloseAudio();
 		Mix_Quit();
+	}
+
+	void AudioManager::PlaySFX(std::string filename, int loops, int channel)
+	{
+		Mix_PlayChannel(channel, m_pAssetManager->GetSFX(filename), loops);
 	}
 
 	void AudioManager::PlayMusic(std::string filename, int loops)
@@ -66,12 +69,7 @@ namespace SDLFramework
 		Mix_HaltMusic();
 	}
 
-	void AudioManager::PlaySFX(std::string filename, int loops, int channel)
-	{
-		Mix_PlayChannel(channel, m_pAssetManager->GetSFX(filename), loops);
-	}
-
-	void AudioManager::Release()
+	void AudioManager::UnLoad()
 	{
 		delete p_Instance;
 		p_Instance = nullptr;

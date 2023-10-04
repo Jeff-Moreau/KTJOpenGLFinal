@@ -1,12 +1,16 @@
 #ifndef ASSET_MANAGER_H
 #define ASSET_MANAGER_H
 
+// EXTERNAL INCLUDES
 #include "SDL2_mixer-2.0.4/include/SDL_mixer.h"
-#include "GraphicsManager.h"
 #include "SDL2/SDL.h"
 
+// SYSTEM INCLUDES
 #include <sstream>
 #include <map>
+
+// PROJECT INCLUDES
+#include "GraphicsManager.h"
 
 namespace SDLFramework
 {
@@ -23,9 +27,9 @@ namespace SDLFramework
 		static AssetManager* p_Instance;
 
 	public: // SINGLETON
-		static AssetManager* Instance();
+		static AssetManager* Load();
 
-	private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		AssetManager();
 		~AssetManager();
 
@@ -36,7 +40,7 @@ namespace SDLFramework
 	public: // CLEANUP
 		void DestroyMusic(Mix_Music* music);
 		void DestroySFX(Mix_Chunk* sfx);
-		static void Release();
+		static void UnLoad();
 	};
 }
 #endif // !ASSET_MANAGER_H

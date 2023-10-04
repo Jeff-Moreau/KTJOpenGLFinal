@@ -1,31 +1,38 @@
 #ifndef FONT_H
 #define FONT_H
 
+// EXTERNAL INCLUDES
+#include "glm/ext/matrix_clip_space.hpp"
+#include "glad/glad.h"
+#include "glm/glm.hpp"
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
+// SYSTEM INCLUDES
 #include <iostream>
 #include <string>
 #include <map>
 
-#include "glm/ext/matrix_clip_space.hpp"
+// PROJECT INCLUDES
 #include "MathHelper.h"
-#include "glad/glad.h"
-#include "ft2build.h"
-#include "glm/glm.hpp"
 #include "Shader.h"
-#include FT_FREETYPE_H
-
 
 using namespace SDLFramework;
 
 struct Character
 {
-	unsigned int ID;		// ID handle of the glyph texture
-	glm::ivec2 Size;		// Size of glyph
-	glm::ivec2 Bearing;		// Offset from baseline to left/top of glyph
-	unsigned int Offset;	// Offset to advance to next glyph
+	unsigned int ID;
+	glm::ivec2 Size;
+	glm::ivec2 Bearing;
+	unsigned int Offset;
 };
 
 class Font
 {
+public: // ACCESSABLE VARIABLE DECLARATIONS
+	int TextWidth;
+	int TextHeight;
+
 private: // MEMBER CONTAINER DECLARATIONS
 	std::map<char, Character> _CharacterList;
 
@@ -35,17 +42,18 @@ private: // MEMBER VARIABLE DECLARATIONS
 	Shader _FontShader;
 	float _XPos;
 	float _YPos;
+	glm::vec3 _TextColor;
 
-public: // ACCESSABLE VARIABLE DECLARATIONS
-	int TextWidth;
-	int TextHeight;
-
-public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	Font();
 	Font(std::string fontName, int pixHeight, Shader shader);
 
 public: // GETTERS
-	Vector2 GetFontPosition();
+	Vector2 GetTextPosition();
+	glm::vec3 GetTextColor();
+
+public: // SETTERS
+	void SetTextColor(glm::vec3 color);
 
 public: // DOERS
 	void RenderText(std::string text, float x, float y, float scale, glm::vec3 color);

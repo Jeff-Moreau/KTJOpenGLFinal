@@ -1,11 +1,16 @@
 #ifndef GRAPHICS_MANAGER_H
 #define GRAPHICS_MANAGER_H
 
+// EXTERNAL INCLUDES
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include "SDL2/SDL.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include "Shader.h"
+
+// SYSTEM INCLUDES
 #include <iostream>
+
+// PROJECT INCLUDES
+#include "Shader.h"
 
 namespace SDLFramework
 {
@@ -14,6 +19,7 @@ namespace SDLFramework
 	public: // ACCESSABLE VARIABLE DECLARATIONS
 		const unsigned int SCREEN_WIDTH = 800;
 		const unsigned int SCREEN_HEIGHT = 600;
+
 		Shader TextureShader;
 		Shader FontShader;
 		Shader ModelShader;
@@ -25,9 +31,9 @@ namespace SDLFramework
 		static GraphicsManager* p_ThisInstance;
 	
 	public: // SINGLETON
-		static GraphicsManager* Instance();
+		static GraphicsManager* Load();
 	
-	public:// CONSTRUCTORS / DESTRUCTORS / OVERLOADS
+	public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		GraphicsManager();
 		~GraphicsManager();
 	
@@ -36,7 +42,12 @@ namespace SDLFramework
 	
 	public: // DOERS
 		static void FramebufferSizeCallback(GLFWwindow* gameWindow, int width, int height);
-		static void Release();
+
+	private: // DOERS
+		void Initialize();
+
+	public: // CLEANUP
+		static void UnLoad();
 	};
 }
 #endif // !GRAPHICS_MANAGER_H

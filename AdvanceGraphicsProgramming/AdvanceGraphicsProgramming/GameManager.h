@@ -1,11 +1,9 @@
 #ifndef GAME_MANAGER_H
 #define GAME_MANAGER_H
 
+// PROJECT INCLUDES
 #include "GraphicsManager.h"
 #include "ScreenManager.h"
-#include "Shader.h"
-#include "Camera.h"
-#include "Image.h"
 
 class GameManager
 {
@@ -14,11 +12,6 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	ScreenManager* p_ScreenManager;
 
 private: // MEMBER VARIABLE DECLARATIONS
-	Camera _Camera;
-	glm::vec3 _CameraPos;
-	glm::vec3 _CameraFront;
-	glm::vec3 _CameraUp;
-
 	bool _ExitGame;
 	SDL_Event _Event;
 
@@ -26,19 +19,18 @@ private: // SINGLETON
 	static GameManager* p_ThisInstance;
 
 public: // SINGLETON
-	static GameManager* Instance();
+	static GameManager* Load();
 
-public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	GameManager();
 	~GameManager();
 
 public: // DOERS
 	void Run();
 	void Update();
-	void LateUpdate();
 	void Render();
 
 public: // CLEANUP
-	static void Release();
+	static void UnLoad();
 };
 #endif // !GAME_MANAGER_H

@@ -21,7 +21,7 @@ private:
     Shader _FontShader;
     glm::vec3 _Color;
 
-public:
+public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
     TextButton();
     ~TextButton();
 

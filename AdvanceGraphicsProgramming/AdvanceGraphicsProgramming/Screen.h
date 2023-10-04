@@ -1,15 +1,20 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#include "AudioManager.h"
+// EXTERNAL INCLUDES
+#include "glm/glm.hpp"
+
+// SYSTEM INCLUDES
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+// PROJECT INCLUDES
 #include "GraphicsManager.h"
+#include "AudioManager.h"
 #include "Model.h"
 #include "Image.h"
 #include "Font.h"
-#include "glm/glm.hpp"
-#include "GLFW/glfw3.h"
-#include <cmath>
-#include <iostream>
 
 class Screen
 {

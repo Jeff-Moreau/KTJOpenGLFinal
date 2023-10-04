@@ -1,10 +1,12 @@
 #ifndef SCREEN_MANAGER_H
 #define SCREEN_MANAGER_H
 
+// SYSTEM INCLUDES
+#include <vector>
+
+// PROJECT INCLUDES
 #include "StartScreen.h"
 #include "PlayScreen.h"
-
-#include <vector>
 
 class ScreenManager
 {
@@ -19,15 +21,15 @@ private: // MEMBER CONTAINER DECLARATIONS
 	std::vector<Screen*> p_Screens;
 
 private: // MEMBER VARIABLE DECLARATIONS
-	Screens _CurrentScreen; // <-- used to determine which screens needs to be render and updating
+	Screens _CurrentScreen;
 
 private: // SINGLETON
 	static ScreenManager* p_ThisInstance;
 
 public: // SINGLETON
-	static ScreenManager* Instance();
+	static ScreenManager* Load();
 
-private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	ScreenManager();
 	~ScreenManager();
 
@@ -39,6 +41,6 @@ public: // DOERS
 	void Render();
 
 public: // CLEANUP
-	static void Release();
+	static void UnLoad();
 };
 #endif // !SCREEN_MANAGER_H

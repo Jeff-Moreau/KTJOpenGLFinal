@@ -3,10 +3,10 @@
 int main(int argc, char* args[])
 {
 	srand(time(0));
-	GameManager* game = GameManager::Instance();
-	game->Run();
 
-	GameManager::Release();
+	GameManager* game = GameManager::Load();
+	game->Run();
+	GameManager::UnLoad();
 
 	return 0;
 }

@@ -1,6 +1,7 @@
 #ifndef AUDIO_MANAGER_H
 #define AUDIO_MANAGER_H
 
+// PROJECT INCLUDES
 #include "AssetManager.h"
 
 namespace SDLFramework
@@ -14,23 +15,21 @@ namespace SDLFramework
 		static AudioManager* p_Instance;
 
 	public: // SINGLETON
-		static AudioManager* Instance();
+		static AudioManager* Load();
 
-	private: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+	private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		AudioManager();
 		~AudioManager();
 
 	public: // DOERS
+		void PlaySFX(std::string filename, int loops = 0, int channel = -1);
 		void PlayMusic(std::string filename, int loops = -1);
 		void PauseMusic();
 		void ResumeMusic();
 		void StopMusic();
 
-	public: // DOERS
-		void PlaySFX(std::string filename, int loops = 0, int channel = -1);
-
 	public: // CLEANUP
-		static void Release();
+		static void UnLoad();
 	};
 }
 #endif // !AUDIO_MANAGER_H

@@ -135,7 +135,7 @@ namespace SDLFramework
 		}
 	};
 
-	struct Vertex {
+	/*struct Vertex {
 		Vector2 position;
 
 		struct UV {
@@ -166,7 +166,7 @@ namespace SDLFramework
 			color.b = b;
 			color.a = a;
 		}
-	};
+	};*/
 }
 
 #endif // !MATH_HELPER_H

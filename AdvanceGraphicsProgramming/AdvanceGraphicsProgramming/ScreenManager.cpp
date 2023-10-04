@@ -2,7 +2,7 @@
 
 ScreenManager* ScreenManager::p_ThisInstance = nullptr;
 
-ScreenManager* ScreenManager::Instance()
+ScreenManager* ScreenManager::Load()
 {
 	if (p_ThisInstance == nullptr)
 	{
@@ -40,10 +40,12 @@ void ScreenManager::Update()
 
 void ScreenManager::Render()
 {
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	p_Screens[(int)_CurrentScreen]->Render();
 }
 
-void ScreenManager::Release()
+void ScreenManager::UnLoad()
 {
 	delete p_ThisInstance;
 	p_ThisInstance = nullptr;

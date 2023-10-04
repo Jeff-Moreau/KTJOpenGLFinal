@@ -71,9 +71,19 @@ Font::Font(std::string fontName, int pixHeight, Shader shader)
 	glBindVertexArray(0);
 }
 
-Vector2 Font::GetFontPosition()
+Vector2 Font::GetTextPosition()
 {
 	return Vector2(_XPos, _YPos);
+}
+
+glm::vec3 Font::GetTextColor()
+{
+	return _TextColor;
+}
+
+void Font::SetTextColor(glm::vec3 color)
+{
+	_TextColor = color;
 }
 
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
@@ -81,9 +91,10 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 	_TotalCharacters = 0;
 	_XPos = x;
 	_YPos = y;
+	_TextColor = color;
 	_FontShader.Use();
-
-	glUniform3f(glGetUniformLocation(_FontShader.GetID(), "textColor"), color.x, color.y, color.z);
+	
+	glUniform3f(glGetUniformLocation(_FontShader.GetID(), "textColor"), _TextColor.x, _TextColor.y, _TextColor.z);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(_VAO);
 

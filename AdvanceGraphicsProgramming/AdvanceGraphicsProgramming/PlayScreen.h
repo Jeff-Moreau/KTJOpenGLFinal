@@ -1,9 +1,8 @@
 #ifndef PLAY_SCREEN_H
 #define PLAY_SCREEN_H
 
+// PROJECT INCLUDES
 #include "Screen.h"
-#include "Shader.h"
-#include <vector>
 
 using namespace SDLFramework;
 
@@ -19,6 +18,9 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 	std::vector<Model*> p_JarJarHeadsRowTwo;
 	std::vector<Model*> p_JarJarHeadsRowThree;
 
+	Model* p_SaberOne;
+	Model* p_SaberTwo;	
+
 	Font* p_MainMenu;
 	Font* p_Score;
 	Font* p_Round;
@@ -33,7 +35,7 @@ private: // MEMBER VARIABLE DECLARATIONS
 	float _Time;
 	int _NewTime;
 
-public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
+public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	PlayScreen();
 	~PlayScreen();
 

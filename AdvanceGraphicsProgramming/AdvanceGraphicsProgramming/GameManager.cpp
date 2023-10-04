@@ -2,7 +2,7 @@
 
 GameManager* GameManager::p_ThisInstance = nullptr;
 
-GameManager* GameManager::Instance()
+GameManager* GameManager::Load()
 {
 	if (p_ThisInstance == nullptr)
 	{
@@ -12,25 +12,25 @@ GameManager* GameManager::Instance()
 	return p_ThisInstance;
 }
 
-
 GameManager::GameManager()
 {
 	_ExitGame = false;
+	_Event.type = SDL_FIRSTEVENT;
 
 	stbi_set_flip_vertically_on_load(true);
 
-	p_GraphicsManager = GraphicsManager::Instance();
-	p_ScreenManager = ScreenManager::Instance();
+	p_GraphicsManager = GraphicsManager::Load();
+	p_ScreenManager = ScreenManager::Load();
 }
 
 GameManager::~GameManager()
 {
-	GraphicsManager::Release();
+	GraphicsManager::UnLoad();
 }
 
 void GameManager::Run()
 {
-	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow()))
+	while (!glfwWindowShouldClose(GraphicsManager::Load()->GetWindow()))
 	{
 		while (SDL_PollEvent(&_Event))
 		{
@@ -41,8 +41,8 @@ void GameManager::Run()
 				break;
 			}
 		}
+
 		Update();
-		LateUpdate();
 		Render();
 		glfwPollEvents();
 	}
@@ -50,28 +50,16 @@ void GameManager::Run()
 
 void GameManager::Update()
 {
-	if (glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(GraphicsManager::Instance()->GetWindow(), true);
-	}
-
 	p_ScreenManager->Update();
-}
-
-void GameManager::LateUpdate()
-{
-
 }
 
 void GameManager::Render()
 {
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	p_ScreenManager->Render();
-	glfwSwapBuffers(GraphicsManager::Instance()->GetWindow());
+	glfwSwapBuffers(GraphicsManager::Load()->GetWindow());
 }
 
-void GameManager::Release()
+void GameManager::UnLoad()
 {
 	delete p_ThisInstance;
 	p_ThisInstance = nullptr;

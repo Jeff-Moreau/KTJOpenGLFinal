@@ -5,15 +5,7 @@ Image::Image()
 
 }
 
-Image::Image(std::string imageName, Shader& shader) :
-	_Vertices
-{
-	// positions		// colors			// texture coords
-	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
-	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
-	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
-	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
-}
+Image::Image(std::string imageName, Shader& shader)
 {
 	_Shader = shader;
 	
@@ -47,15 +39,7 @@ Image::Image(std::string imageName, Shader& shader) :
 	stbi_image_free(newTexture);
 }
 
-Image::Image(std::string imageName, Shader& shader, float x, float y, float w, float h) :
-	_Vertices
-{
-	// positions		// colors			// texture coords
-	1.0f, 1.0f, 0.0f,	1.0f, 0.0f, 0.0f,	1.0f, 1.0f,	// top right
-	1.0f, -1.0f, 0.0f,	0.0f, 1.0f, 0.0f,	1.0f, 0.0f,	// bottom right
-	-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,	0.0f, 0.0f,	// bottom left
-	-1.0f, 1.0f, 0.0f,	1.0f, 1.0f, 0.0f,	0.0f, 1.0f	// top left
-}
+Image::Image(std::string imageName, Shader& shader, float x, float y, float w, float h)
 {
 	_Shader = shader;
 
