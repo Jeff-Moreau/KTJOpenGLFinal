@@ -5,7 +5,7 @@ PlayScreen::PlayScreen()
 {
 	_HoverMainMenu - false;
 	_MainMenuColor = glm::vec3();
-	p_SoundFX = AudioManager::Load();
+	_CanShoot = true;
 
     p_BackGroundImage = new Image("TheBackground.png", GraphicsManager::Use()->TextureShader);
 	p_CurtainsImage = new Image("Curtains.png", GraphicsManager::Use()->TextureShader);
@@ -28,6 +28,8 @@ PlayScreen::PlayScreen()
 
 	p_SaberOne = new Model("Assets/Models/3dRedblueSaber.obj");
 	p_SaberTwo = new Model("Assets/Models/3dRedblueSaber.obj");
+	//p_Bullet = new Model("Assets/Models/3dRedblueSaber.obj");
+	p_Gun = new Model("Assets/Models/Gun.obj");
 
 	_TimerReset = true;
 	_Time = 0;
@@ -109,14 +111,24 @@ void PlayScreen::Update()
 		_MainMenuColor = glm::vec3(0, 0, 0);
 	}
 
+	if (buttonstate == GLFW_PRESS && !_HoverMainMenu && _CanShoot)
+	{
+		std::cout << "Im Shooting" << std::endl;
+		p_SoundFX->play2D("Assets/Sounds/beam-8-43831.mp3", false);
+		_CanShoot = false;
+	}
+	if (buttonstate == GLFW_RELEASE)
+	{
+		_CanShoot = true;
+	}
+
 	if (buttonstate == GLFW_PRESS && _HoverMainMenu)
 	{
-		p_SoundFX->PlaySFX("CursorMovementSFX.mp3");
+		p_SoundFX->play2D("Assets/Sounds/CursorMovementSFX.mp3", false);
 		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Start);
 		_TimerReset = true;
 		_Time = 0;
 		_NewTime = 0;
-		std::cout << "Main Menu" << std::endl;
 	}
 
 	static int laststate = GLFW_PRESS;
@@ -136,7 +148,6 @@ void PlayScreen::Render()
     p_BackGroundImage->Render();
 
 	GraphicsManager::Use()->ModelShader.Use();
-
 
 	float randNum = (rand() % ((80 - 30) + 1) + 30);
 	float angle = glfwGetTime() * 200;
@@ -165,7 +176,6 @@ void PlayScreen::Render()
 	p_SaberOne->SetPosition(glm::vec3(0, 3, -30.0f));
 	p_SaberOne->SetRotation(angle, glm::vec3(1.0f, 0.0f, 1.0f));
 	p_SaberOne->Draw(GraphicsManager::Use()->ModelShader);
-	std::cout << p_SaberOne->GetPosition().x << std::endl;
 
 	
 	first = true;
@@ -210,6 +220,14 @@ void PlayScreen::Render()
 		p_JarJarHeadsRowThree[i]->Draw(GraphicsManager::Use()->ModelShader);
 		first = false;
 	}
+
+	float mousePos = _MouseX / ((p_Graphics->SCREEN_WIDTH * 0.5) / 40);
+
+	p_Gun->SetPerspective(45);
+	p_Gun->SetPosition(glm::vec3(0, -3, -3.5f));
+	p_Gun->SetRotation((-mousePos)- 50, glm::vec3(0.0f, 1.0f, 0.0f));
+	std::cout << mousePos << std::endl;
+	p_Gun->Draw(GraphicsManager::Use()->ModelShader);
 
 	p_CurtainsImage->Render();
 

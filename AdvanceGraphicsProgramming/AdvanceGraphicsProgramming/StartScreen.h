@@ -3,16 +3,10 @@
 
 // PROJECT INCLUDES
 #include "Screen.h"
-#include <irrklang/irrKlang.h>
-
-using namespace SDLFramework;
-using namespace irrklang;
 
 class StartScreen : public Screen
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
-	ISoundEngine* p_SoundFX;
-	//AudioManager* p_SoundFX;
 	Image* p_BackGroundImage;
 	Font* p_ExitGame;
 	Font* p_NewGame;

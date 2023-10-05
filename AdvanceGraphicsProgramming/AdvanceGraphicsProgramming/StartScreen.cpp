@@ -9,11 +9,10 @@ StartScreen::StartScreen()
 	_HoverExitGame = false;
 	_HoverNewGame = false;
 
-	p_SoundFX = createIrrKlangDevice();
-	p_BackGroundImage = new Image("KTJTitleScreen.png", GraphicsManager::Use()->TextureShader);
+	p_BackGroundImage = new Image("KTJTitleScreen.png", p_Graphics->TextureShader);
 
-	p_NewGame = new Font("Starjedi.ttf", 24, GraphicsManager::Use()->FontShader);
-	p_ExitGame = new Font("Starjedi.ttf", 32, GraphicsManager::Use()->FontShader);
+	p_NewGame = new Font("Starjedi.ttf", 24, p_Graphics->FontShader);
+	p_ExitGame = new Font("Starjedi.ttf", 32, p_Graphics->FontShader);
 }
 
 StartScreen::~StartScreen()
@@ -30,15 +29,15 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
-	int buttonstate = glfwGetMouseButton(GraphicsManager::Use()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
-	glfwGetCursorPos(GraphicsManager::Use()->GetWindow(), &_MouseX, &_MouseY);
+	int buttonstate = glfwGetMouseButton(p_Graphics->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
+	glfwGetCursorPos(p_Graphics->GetWindow(), &_MouseX, &_MouseY);
 
 	HoverText(p_ExitGame, _ExitColor, glm::vec3(0, 255, 255), glm::vec3(0, 0, 0), _HoverExitGame);
 	HoverText(p_NewGame, _StartColor, glm::vec3(0, 255, 255), glm::vec3(255, 255, 255), _HoverNewGame);
 
 	if (buttonstate == GLFW_PRESS && _HoverExitGame)
 	{
-		glfwSetWindowShouldClose(GraphicsManager::Use()->GetWindow(), 1);
+		glfwSetWindowShouldClose(p_Graphics->GetWindow(), 1);
 	}
 
 	if (buttonstate == GLFW_PRESS && _HoverNewGame)
@@ -72,7 +71,7 @@ void StartScreen::Render()
 
 void StartScreen::HoverText(Font* font, glm::vec3& textColor, glm::vec3 hoverColor, glm::vec3 restColor, bool& hover)
 {
-	if ((_MouseY < ((GraphicsManager::Use()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight) + font->TextHeight) && (_MouseY > (GraphicsManager::Use()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight))
+	if ((_MouseY < ((p_Graphics->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight) + font->TextHeight) && (_MouseY > (p_Graphics->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight))
 	{
 		if ((_MouseX > font->GetTextPosition().x) && (_MouseX < font->GetTextPosition().x + font->TextWidth))
 		{

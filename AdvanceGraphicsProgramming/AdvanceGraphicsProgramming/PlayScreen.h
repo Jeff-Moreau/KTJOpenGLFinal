@@ -4,13 +4,9 @@
 // PROJECT INCLUDES
 #include "Screen.h"
 
-using namespace SDLFramework;
-
 class PlayScreen : public Screen
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
-	AudioManager* p_SoundFX;
-
 	Image* p_BackGroundImage;
 	Image* p_CurtainsImage;
 
@@ -20,6 +16,8 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 
 	Model* p_SaberOne;
 	Model* p_SaberTwo;	
+	Model* p_Bullet;
+	Model* p_Gun;
 
 	Font* p_MainMenu;
 	Font* p_Score;
@@ -29,6 +27,7 @@ private: // MEMBER POINTER VARIABLE DECLARATIONS
 private: // MEMBER VARIABLE DECLARATIONS
 	glm::vec3 _MainMenuColor;
 	bool _HoverMainMenu;
+	bool _CanShoot;
 
 private: // MEMBER VARIABLE DECLARATIONS
 	bool _TimerReset;
