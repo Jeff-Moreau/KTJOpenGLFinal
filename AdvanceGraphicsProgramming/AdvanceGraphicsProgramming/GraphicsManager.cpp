@@ -13,6 +13,11 @@ namespace SDLFramework
 	
 		return p_ThisInstance;
 	}
+
+	GraphicsManager* GraphicsManager::Use()
+	{
+		return Load();
+	}
 	
 	GraphicsManager::GraphicsManager()
 	{

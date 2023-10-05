@@ -3,15 +3,17 @@
 
 StartScreen::StartScreen()
 {
+	_ExitColor = glm::vec3();
+	_StartColor = glm::vec3();
+	_HoverNewGameSound = true;
 	_HoverExitGame = false;
 	_HoverNewGame = false;
 
-	//p_SoundFX = AudioManager::Load();
 	p_SoundFX = createIrrKlangDevice();
-	p_BackGroundImage = new Image("KTJTitleScreen.png", GraphicsManager::Load()->TextureShader);
+	p_BackGroundImage = new Image("KTJTitleScreen.png", GraphicsManager::Use()->TextureShader);
 
-	p_NewGame = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-	p_ExitGame = new Font("Starjedi.ttf", 32, GraphicsManager::Load()->FontShader);
+	p_NewGame = new Font("Starjedi.ttf", 24, GraphicsManager::Use()->FontShader);
+	p_ExitGame = new Font("Starjedi.ttf", 32, GraphicsManager::Use()->FontShader);
 }
 
 StartScreen::~StartScreen()
@@ -28,29 +30,35 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
-	int buttonstate = glfwGetMouseButton(GraphicsManager::Load()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
-	glfwGetCursorPos(GraphicsManager::Load()->GetWindow(), &_MouseX, &_MouseY);
+	int buttonstate = glfwGetMouseButton(GraphicsManager::Use()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
+	glfwGetCursorPos(GraphicsManager::Use()->GetWindow(), &_MouseX, &_MouseY);
 
 	HoverText(p_ExitGame, _ExitColor, glm::vec3(0, 255, 255), glm::vec3(0, 0, 0), _HoverExitGame);
 	HoverText(p_NewGame, _StartColor, glm::vec3(0, 255, 255), glm::vec3(255, 255, 255), _HoverNewGame);
 
 	if (buttonstate == GLFW_PRESS && _HoverExitGame)
 	{
-		glfwSetWindowShouldClose(GraphicsManager::Load()->GetWindow(), 1);
+		glfwSetWindowShouldClose(GraphicsManager::Use()->GetWindow(), 1);
 	}
 
 	if (buttonstate == GLFW_PRESS && _HoverNewGame)
 	{
 		p_SoundFX->play2D("Assets/Sounds/oh-no.mp3", false);
 		//p_SoundFX->PlaySFX("oh-no.mp3");
-		ScreenManager::Load()->SetCurrentScreen(ScreenManager::Load()->Play);
+		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Play);
 		std::cout << "Start Game now" << std::endl;
 	}
 
-	if (_HoverNewGameSound == 1)
+	if (_HoverNewGame && _HoverNewGameSound)
 	{
 		p_SoundFX->play2D("Assets/Sounds/droidnoise.mp3", false);
 		//p_SoundFX->PlaySFX("droidnoise.mp3");
+		_HoverNewGameSound = false;
+	}
+	
+	if (!_HoverNewGame)
+	{
+		_HoverNewGameSound = true;
 	}
 }
 
@@ -64,7 +72,7 @@ void StartScreen::Render()
 
 void StartScreen::HoverText(Font* font, glm::vec3& textColor, glm::vec3 hoverColor, glm::vec3 restColor, bool& hover)
 {
-	if ((_MouseY < ((GraphicsManager::Load()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight) + font->TextHeight) && (_MouseY > (GraphicsManager::Load()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight))
+	if ((_MouseY < ((GraphicsManager::Use()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight) + font->TextHeight) && (_MouseY > (GraphicsManager::Use()->SCREEN_HEIGHT - font->GetTextPosition().y) - font->TextHeight))
 	{
 		if ((_MouseX > font->GetTextPosition().x) && (_MouseX < font->GetTextPosition().x + font->TextWidth))
 		{

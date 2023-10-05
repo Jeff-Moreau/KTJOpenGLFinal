@@ -14,6 +14,11 @@ namespace SDLFramework
 		return p_Instance;
 	}
 
+	AssetManager* AssetManager::Use()
+	{
+		return Load();
+	}
+
 	AssetManager::AssetManager()
 	{
 

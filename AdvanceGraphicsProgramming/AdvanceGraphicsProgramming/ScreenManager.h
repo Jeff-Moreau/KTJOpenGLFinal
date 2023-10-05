@@ -28,6 +28,7 @@ private: // SINGLETON
 
 public: // SINGLETON
 	static ScreenManager* Load();
+	static ScreenManager* Use();
 
 private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	ScreenManager();

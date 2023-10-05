@@ -30,7 +30,7 @@ GameManager::~GameManager()
 
 void GameManager::Run()
 {
-	while (!glfwWindowShouldClose(GraphicsManager::Load()->GetWindow()))
+	while (!glfwWindowShouldClose(GraphicsManager::Use()->GetWindow()))
 	{
 		while (SDL_PollEvent(&_Event))
 		{
@@ -56,7 +56,7 @@ void GameManager::Update()
 void GameManager::Render()
 {
 	p_ScreenManager->Render();
-	glfwSwapBuffers(GraphicsManager::Load()->GetWindow());
+	glfwSwapBuffers(GraphicsManager::Use()->GetWindow());
 }
 
 void GameManager::UnLoad()

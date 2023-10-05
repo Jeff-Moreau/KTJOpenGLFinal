@@ -28,6 +28,7 @@ namespace SDLFramework
 
 	public: // SINGLETON
 		static AssetManager* Load();
+		static AssetManager* Use();
 
 	private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		AssetManager();

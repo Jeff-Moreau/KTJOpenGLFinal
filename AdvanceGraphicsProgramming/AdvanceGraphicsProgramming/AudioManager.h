@@ -16,6 +16,7 @@ namespace SDLFramework
 
 	public: // SINGLETON
 		static AudioManager* Load();
+		static AudioManager* Use();
 
 	private: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		AudioManager();

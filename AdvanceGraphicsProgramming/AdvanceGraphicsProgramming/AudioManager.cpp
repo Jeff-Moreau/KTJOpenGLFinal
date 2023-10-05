@@ -14,6 +14,11 @@ namespace SDLFramework
 		return p_Instance;
 	}
 
+	AudioManager* AudioManager::Use()
+	{
+		return Load();
+	}
+
 	AudioManager::AudioManager()
 	{
 		m_pAssetManager = AssetManager::Load();

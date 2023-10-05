@@ -19,8 +19,8 @@
 class Screen
 {
 protected:
-	double _MouseX;
-	double _MouseY;
+	double _MouseX = 0;
+	double _MouseY = 0;
 
 public: // SHARED DOERS
 	virtual void SinglePlayer() {};

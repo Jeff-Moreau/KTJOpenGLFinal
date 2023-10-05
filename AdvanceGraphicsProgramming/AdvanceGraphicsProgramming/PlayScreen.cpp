@@ -3,20 +3,23 @@
 
 PlayScreen::PlayScreen()
 {
+	_HoverMainMenu - false;
+	_MainMenuColor = glm::vec3();
 	p_SoundFX = AudioManager::Load();
 
-    p_BackGroundImage = new Image("TheBackground.png", GraphicsManager::Load()->TextureShader);
-	p_CurtainsImage = new Image("Curtains.png", GraphicsManager::Load()->TextureShader);
+    p_BackGroundImage = new Image("TheBackground.png", GraphicsManager::Use()->TextureShader);
+	p_CurtainsImage = new Image("Curtains.png", GraphicsManager::Use()->TextureShader);
 
-    p_Score = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-	p_ScoreTotal = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-    p_Round = new Font("Starjedi.ttf", 24, GraphicsManager::Load()->FontShader);
-    p_MainMenu = new Font("Starjedi.ttf", 32, GraphicsManager::Load()->FontShader);
+    p_Score = new Font("Starjedi.ttf", 24, GraphicsManager::Use()->FontShader);
+	p_ScoreTotal = new Font("Starjedi.ttf", 24, GraphicsManager::Use()->FontShader);
+    p_Round = new Font("Starjedi.ttf", 24, GraphicsManager::Use()->FontShader);
+    p_MainMenu = new Font("Starjedi.ttf", 32, GraphicsManager::Use()->FontShader);
 
 	for (int i = 0; i < 4; i++)
 	{
 		p_JarJarHeadsRowOne.push_back(new Model("Assets/Models/CubeJarJar.obj"));
 	}
+
 	for (int i = 0; i < 3; i++)
 	{
 		p_JarJarHeadsRowTwo.push_back(new Model("Assets/Models/CubeJarJar.obj"));
@@ -80,13 +83,14 @@ void PlayScreen::Update()
 		_NewTime = 0;
 		_TimerReset = false;
 	}
+
 	_Time = glfwGetTime();
 	_NewTime = trunc(_Time);
 	
-	int buttonstate = glfwGetMouseButton(GraphicsManager::Load()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
-	glfwGetCursorPos(GraphicsManager::Load()->GetWindow(), &_MouseX, &_MouseY);
+	int buttonstate = glfwGetMouseButton(GraphicsManager::Use()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT);
+	glfwGetCursorPos(GraphicsManager::Use()->GetWindow(), &_MouseX, &_MouseY);
 
-	if ((_MouseY < ((GraphicsManager::Load()->SCREEN_HEIGHT - p_MainMenu->GetTextPosition().y) - p_MainMenu->TextHeight) + p_MainMenu->TextHeight) && (_MouseY > (GraphicsManager::Load()->SCREEN_HEIGHT - p_MainMenu->GetTextPosition().y) - p_MainMenu->TextHeight))
+	if ((_MouseY < ((GraphicsManager::Use()->SCREEN_HEIGHT - p_MainMenu->GetTextPosition().y) - p_MainMenu->TextHeight) + p_MainMenu->TextHeight) && (_MouseY > (GraphicsManager::Use()->SCREEN_HEIGHT - p_MainMenu->GetTextPosition().y) - p_MainMenu->TextHeight))
 	{
 		if ((_MouseX > p_MainMenu->GetTextPosition().x) && (_MouseX < p_MainMenu->GetTextPosition().x + p_MainMenu->TextWidth))
 		{
@@ -108,7 +112,7 @@ void PlayScreen::Update()
 	if (buttonstate == GLFW_PRESS && _HoverMainMenu)
 	{
 		p_SoundFX->PlaySFX("CursorMovementSFX.mp3");
-		ScreenManager::Load()->SetCurrentScreen(ScreenManager::Load()->Start);
+		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Start);
 		_TimerReset = true;
 		_Time = 0;
 		_NewTime = 0;
@@ -116,7 +120,7 @@ void PlayScreen::Update()
 	}
 
 	static int laststate = GLFW_PRESS;
-	int keystate = glfwGetKey(GraphicsManager::Load()->GetWindow(), GLFW_KEY_K);
+	int keystate = glfwGetKey(GraphicsManager::Use()->GetWindow(), GLFW_KEY_K);
 	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
 	{
 		for (int i = 0; i < p_JarJarHeadsRowOne.size(); i++)
@@ -125,29 +129,13 @@ void PlayScreen::Update()
 		}
 	}
 	laststate = keystate;
-
-	/*keystate = glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_A);
-	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
-	{
-		if (p_JarJarHeadsRowOne.size() <= 5)
-		{
-			p_JarJarHeadsRowOne.push_back(new Model("Assets/Models/CubeJarJar.obj"));
-		}
-	}
-	laststate = keystate;*/
-
-	/*if (p_JarJarHeadsRowOne[0]->GetPosition().z <= -5.0f)
-	{
-		p_JarJarHeadsRowOne[0]->SetPosition(glm::vec3(p_JarJarHeadsRowOne[0]->GetPosition().x, p_JarJarHeadsRowOne[0]->GetPosition().y, p_JarJarHeadsRowOne[0]->GetPosition().z + 2.0f));
-		std::cout << "Lets Resize" << std::endl;
-	}*/
 }
 
 void PlayScreen::Render()
 {
     p_BackGroundImage->Render();
 
-	GraphicsManager::Load()->ModelShader.Use();
+	GraphicsManager::Use()->ModelShader.Use();
 
 
 	float randNum = (rand() % ((80 - 30) + 1) + 30);
@@ -155,8 +143,6 @@ void PlayScreen::Render()
 	float newPosition = -9.0f;
 	float bounce = glfwGetTime();
 	bool first = true;
-
-
 
 	for (int i = 0; i < p_JarJarHeadsRowOne.size(); i++)
 	{
@@ -171,26 +157,16 @@ void PlayScreen::Render()
 			p_JarJarHeadsRowOne[i]->SetPosition(glm::vec3(newPosition, 4.5f, -30.0f));
 			p_JarJarHeadsRowOne[i]->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
 		}
-		p_JarJarHeadsRowOne[i]->Draw(GraphicsManager::Load()->ModelShader);
+		p_JarJarHeadsRowOne[i]->Draw(GraphicsManager::Use()->ModelShader);
 		first = false;
 	}
 
-	if (p_SaberOne->GetPosition().x > -5 && p_SaberOne->GetPosition().x < 10)
-	{
-		p_SaberOne->SetPerspective(45);
-		p_SaberOne->SetPosition(glm::vec3(bounce, 3, -30.0f));
-		p_SaberOne->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
-		p_SaberOne->Draw(GraphicsManager::Load()->ModelShader);
-		std::cout << p_SaberOne->GetPosition().x << std::endl;
-	}
-	else if (p_SaberOne->GetPosition().x > 10)
-	{
-		p_SaberOne->SetPerspective(45);
-		p_SaberOne->SetPosition(glm::vec3(-4, 3, -30.0f));
-		p_SaberOne->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
-		p_SaberOne->Draw(GraphicsManager::Load()->ModelShader);
-		std::cout << "We Got here" << std::endl;
-	}
+	p_SaberOne->SetPerspective(45);
+	p_SaberOne->SetPosition(glm::vec3(0, 3, -30.0f));
+	p_SaberOne->SetRotation(angle, glm::vec3(1.0f, 0.0f, 1.0f));
+	p_SaberOne->Draw(GraphicsManager::Use()->ModelShader);
+	std::cout << p_SaberOne->GetPosition().x << std::endl;
+
 	
 	first = true;
 	newPosition = -3.5f;
@@ -207,14 +183,14 @@ void PlayScreen::Render()
 			p_JarJarHeadsRowTwo[i]->SetPosition(glm::vec3(newPosition, 0.0f, -20.0f));
 			p_JarJarHeadsRowTwo[i]->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
 		}
-		p_JarJarHeadsRowTwo[i]->Draw(GraphicsManager::Load()->ModelShader);
+		p_JarJarHeadsRowTwo[i]->Draw(GraphicsManager::Use()->ModelShader);
 		first = false;
 	}
 
 	p_SaberTwo->SetPerspective(45);
 	p_SaberTwo->SetPosition(glm::vec3(0, -1.5, -20.0f));
-	p_SaberTwo->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
-	p_SaberTwo->Draw(GraphicsManager::Load()->ModelShader);
+	p_SaberTwo->SetRotation(angle, glm::vec3(1.0f, 0.0f, 1.0f));
+	p_SaberTwo->Draw(GraphicsManager::Use()->ModelShader);
 
 	first = true;
 	newPosition = -4.0f;
@@ -231,7 +207,7 @@ void PlayScreen::Render()
 			p_JarJarHeadsRowThree[i]->SetPosition(glm::vec3(newPosition, -3.2f, -13.0f));
 			p_JarJarHeadsRowThree[i]->SetRotation(angle, glm::vec3(0.0f, 1.0f, 0.0f));
 		}
-		p_JarJarHeadsRowThree[i]->Draw(GraphicsManager::Load()->ModelShader);
+		p_JarJarHeadsRowThree[i]->Draw(GraphicsManager::Use()->ModelShader);
 		first = false;
 	}
 
@@ -241,5 +217,5 @@ void PlayScreen::Render()
 	p_ScoreTotal->RenderText(std::to_string(_NewTime), 150, 57, 1, glm::vec3(0, 0, 0));
 
     p_Round->RenderText("Round :", 590, 57, 1, glm::vec3(0, 0, 0));
-    p_MainMenu->RenderText("Main Menu", (GraphicsManager::Load()->SCREEN_WIDTH / 2) - (p_MainMenu->TextWidth / 2), 10, 1, _MainMenuColor);
+    p_MainMenu->RenderText("Main Menu", (GraphicsManager::Use()->SCREEN_WIDTH / 2) - (p_MainMenu->TextWidth / 2), 10, 1, _MainMenuColor);
 }

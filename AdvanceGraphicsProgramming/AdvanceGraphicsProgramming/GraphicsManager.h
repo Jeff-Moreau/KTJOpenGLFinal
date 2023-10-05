@@ -32,6 +32,7 @@ namespace SDLFramework
 	
 	public: // SINGLETON
 		static GraphicsManager* Load();
+		static GraphicsManager* Use();
 	
 	public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 		GraphicsManager();
@@ -39,7 +40,6 @@ namespace SDLFramework
 	
 	public: // GETTERS
 		GLFWwindow* GetWindow();
-	
 	public: // DOERS
 		static void FramebufferSizeCallback(GLFWwindow* gameWindow, int width, int height);
 

@@ -12,6 +12,11 @@ ScreenManager* ScreenManager::Load()
 	return p_ThisInstance;
 }
 
+ScreenManager* ScreenManager::Use()
+{
+	return Load();
+}
+
 ScreenManager::ScreenManager()
 {
 	p_Screens.push_back(new StartScreen());

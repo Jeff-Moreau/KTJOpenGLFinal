@@ -30,7 +30,7 @@ struct Vertex
 
 struct Texture
 {
-    unsigned int ID;
+    unsigned int ID = 0;
     string Type;
     string Path;
 };

@@ -20,21 +20,21 @@ void Model::SetPosition(glm::vec3 position)
     _Position = position;
     glm::mat4 Position = glm::mat4(1.0f);
     Position = glm::translate(Position, position);
-    GraphicsManager::Load()->ModelShader.SetMat4("view", Position);
+    GraphicsManager::Use()->ModelShader.SetMat4("view", Position);
 }
 
 void Model::SetRotation(float angle, glm::vec3 axis)
 {
     glm::mat4 Rotation = glm::mat4(1.0f);
     Rotation = glm::rotate(Rotation, glm::radians(angle), axis);
-    GraphicsManager::Load()->ModelShader.SetMat4("model", Rotation);
+    GraphicsManager::Use()->ModelShader.SetMat4("model", Rotation);
 }
 
 void Model::SetPerspective(float fov)
 {
     glm::mat4 Perspective = glm::mat4(1.0f);
-    Perspective = glm::perspective(glm::radians(fov), (float)GraphicsManager::Load()->SCREEN_WIDTH / (float)GraphicsManager::Load()->SCREEN_HEIGHT, 0.1f, 100.0f);
-    GraphicsManager::Load()->ModelShader.SetMat4("projection", Perspective);
+    Perspective = glm::perspective(glm::radians(fov), (float)GraphicsManager::Use()->SCREEN_WIDTH / (float)GraphicsManager::Use()->SCREEN_HEIGHT, 0.1f, 100.0f);
+    GraphicsManager::Use()->ModelShader.SetMat4("projection", Perspective);
 }
 
 void Model::Draw(Shader& shader)
@@ -84,7 +84,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         Vertex vertex;
-        glm::vec3 vector;
+        glm::vec3 vector = glm::vec3();
 
         vector.x = mesh->mVertices[i].x;
         vector.y = mesh->mVertices[i].y;
@@ -101,7 +101,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
         if (mesh->mTextureCoords[0])
         {
-            glm::vec2 vec;
+            glm::vec2 vec = glm::vec2();
             vec.x = mesh->mTextureCoords[0][i].x;
             vec.y = mesh->mTextureCoords[0][i].y;
             vertex.TexCoords = vec;
@@ -196,7 +196,7 @@ unsigned int Model::TextureFromFile(const char* path, const string& directory, b
 
     if (data)
     {
-        GLenum format;
+        GLenum format = 0;
 
         if (nrComponents == 1)
         {

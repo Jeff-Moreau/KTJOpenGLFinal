@@ -22,7 +22,7 @@ private: // MEMBER VARIABLE DECLARATIONS
 	glm::vec3 _StartColor;
 	bool _HoverExitGame;
 	bool _HoverNewGame;
-	int _HoverNewGameSound;
+	bool _HoverNewGameSound;
 
 public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
 	StartScreen();
