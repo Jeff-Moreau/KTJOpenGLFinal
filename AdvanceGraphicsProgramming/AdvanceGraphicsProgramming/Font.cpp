@@ -5,12 +5,10 @@ Font::Font()
 	_TotalCharacters = 0;
 }
 
-Font::Font(std::string fontName, Shader& shaderToUse, int pixHeight)
+Font::Font(std::string fontName, int pixHeight, Shader shader)
 {
-	// MEMBER VARIABLE INSTANTIATION
-	_FontShader = shaderToUse;
+	_FontShader = shader;
 
-	// LOCAL VARIABLE DECLARATIONS
 	FT_Library fontLibrary;
 	FT_Face fontTypeFace;
 
@@ -27,54 +25,41 @@ Font::Font(std::string fontName, Shader& shaderToUse, int pixHeight)
 	}
 	else
 	{
-		// set size to load glyphs as
 		FT_Set_Pixel_Sizes(fontTypeFace, 0, pixHeight);
-
 
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		for (unsigned char c = 0; c < 128; c++)
 		{
-			// load character glyph
 			if (FT_Load_Char(fontTypeFace, c, FT_LOAD_RENDER))
 			{
 				std::cout << "ERROR::FREETYPE: Failed to load Glyph" << std::endl;
 				continue;
 			}
 
-			// generate texture
-			// LOCAL VARIABLE DECLARATIONS
 			unsigned int texture;
-
 			glGenTextures(1, &texture);
 			glBindTexture(GL_TEXTURE_2D, texture);
 			glTexImage2D(GL_TEXTURE_2D,0,GL_RED,fontTypeFace->glyph->bitmap.width,fontTypeFace->glyph->bitmap.rows,0,GL_RED,GL_UNSIGNED_BYTE,fontTypeFace->glyph->bitmap.buffer);
 
-			// set texture options
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			// now store character for later use
-			// LOCAL VARIABLE DECLARATIONS AND INSTANTIATION
 			Character character = {texture,glm::ivec2(fontTypeFace->glyph->bitmap.width, fontTypeFace->glyph->bitmap.rows),glm::ivec2(fontTypeFace->glyph->bitmap_left, fontTypeFace->glyph->bitmap_top),fontTypeFace->glyph->advance.x};
-			
 			_CharacterList.insert(std::pair<char, Character>(c, character));
-
 		}
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	FT_Done_Face(fontTypeFace);
 	FT_Done_FreeType(fontLibrary);
-
-	// LOCAL VARIABLE DECLARATIONS AND INSTANTIATION
+	
 	glm::mat4 screenProjection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
-
-	// MEMBER VARIABLE INSTANTIATION
 	_FontShader.Use();
-
 	glUniformMatrix4fv(glGetUniformLocation(_FontShader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(screenProjection));
+
 	glGenVertexArrays(1, &_VAO);
 	glGenBuffers(1, &_VBO);
 	glBindVertexArray(_VAO);
@@ -93,7 +78,6 @@ Vector2 Font::GetFontPosition()
 
 void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
-	// MEMBER VARIABLE INSTANTIATION
 	_TotalCharacters = 0;
 	_XPos = x;
 	_YPos = y;
@@ -103,8 +87,6 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(_VAO);
 
-	// iterate through all characters
-	// LOCAL VARIABLE DECLARATIONS
 	std::string::const_iterator totalCharacters;
 
 	for (totalCharacters = text.begin(); totalCharacters != text.end(); totalCharacters++)
@@ -136,7 +118,6 @@ void Font::RenderText(std::string text, float x, float y, float scale, glm::vec3
 		TextWidth = _TotalCharacters * characterWidth;
 		TextHeight = characterHeight;
 	}
-
 
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);

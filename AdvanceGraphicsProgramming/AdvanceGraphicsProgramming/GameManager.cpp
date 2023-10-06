@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
 GameManager* GameManager::p_ThisInstance = nullptr;
-// SINGLETON START
+
 GameManager* GameManager::Instance()
 {
 	if (p_ThisInstance == nullptr)
@@ -11,18 +11,16 @@ GameManager* GameManager::Instance()
 
 	return p_ThisInstance;
 }
-// SINGLETON END
 
 
 GameManager::GameManager()
 {
-	stbi_set_flip_vertically_on_load(true);
 	_ExitGame = false;
-	// MEMBER POINTER VARIABLE INSTANTIATION
+
+	stbi_set_flip_vertically_on_load(true);
+
 	p_GraphicsManager = GraphicsManager::Instance();
-	p_Inputs = InputManager::Instance();
 	p_ScreenManager = ScreenManager::Instance();
-	//camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
 
 GameManager::~GameManager()
@@ -32,7 +30,6 @@ GameManager::~GameManager()
 
 void GameManager::Run()
 {
-	// Game Loop
 	while (!glfwWindowShouldClose(GraphicsManager::Instance()->GetWindow()))
 	{
 		while (SDL_PollEvent(&_Event))
@@ -53,13 +50,17 @@ void GameManager::Run()
 
 void GameManager::Update()
 {
-	p_Inputs->Update();
+	if (glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(GraphicsManager::Instance()->GetWindow(), true);
+	}
+
 	p_ScreenManager->Update();
 }
 
 void GameManager::LateUpdate()
 {
-	p_Inputs->UpdatePrevInput();
+
 }
 
 void GameManager::Render()

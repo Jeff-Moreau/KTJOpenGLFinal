@@ -5,16 +5,13 @@ StartScreen::StartScreen()
 {
 	_HoverExitGame = false;
 	_HoverNewGame = false;
-	// MEMBER VARIABLE AND POINTERS INSTANTIATION
+
 	p_SoundFX = AudioManager::Instance();
-	p_Inputs = InputManager::Instance();
 
-	_Shader = Shader("Assets/Shaders/texture.vs", "Assets/Shaders/texture.fs");
-	p_BackGroundImage = new Sprite("Assets/Textures/KTJTitleScreen.png", _Shader);
+	p_BackGroundImage = new Image("Assets/Textures/KTJTitleScreen.png", GraphicsManager::Instance()->TextureShader);
 
-	_FontShader = Shader("Assets/Shaders/Font.vs", "Assets/Shaders/Font.fs");
-	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 24);
-	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", _FontShader, 32);
+	p_NewGame = new Font("Assets/Fonts/Starjedi.ttf", 24, GraphicsManager::Instance()->FontShader);
+	p_ExitGame = new Font("Assets/Fonts/Starjedi.ttf", 32, GraphicsManager::Instance()->FontShader);
 }
 
 StartScreen::~StartScreen()
@@ -35,7 +32,7 @@ void StartScreen::Update()
 	int keystate = glfwGetKey(GraphicsManager::Instance()->GetWindow(), GLFW_KEY_ENTER);
 	if (keystate == GLFW_PRESS && laststate == GLFW_RELEASE)
 	{
-		std::cout << "I pressed E" << std::endl;;
+		std::cout << "pressed Enter" << std::endl;;
 	}
 	laststate = keystate;*/
 	
@@ -105,6 +102,7 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
+
 	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
 	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
 }

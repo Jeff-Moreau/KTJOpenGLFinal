@@ -3,17 +3,15 @@
 
 #include "GraphicsManager.h"
 #include "ScreenManager.h"
-#include "InputManager.h"
 #include "Shader.h"
-#include "Sprite.h"
 #include "Camera.h"
+#include "Image.h"
 
 class GameManager
 {
 private: // MEMBER POINTER VARIABLE DECLARATIONS
 	GraphicsManager* p_GraphicsManager;
 	ScreenManager* p_ScreenManager;
-	InputManager* p_Inputs;
 
 private: // MEMBER VARIABLE DECLARATIONS
 	Camera _Camera;

@@ -1,17 +1,18 @@
 #ifndef FONT_H
 #define FONT_H
 
+#include <iostream>
+#include <string>
+#include <map>
+
 #include "glm/ext/matrix_clip_space.hpp"
 #include "MathHelper.h"
 #include "glad/glad.h"
 #include "ft2build.h"
-#include FT_FREETYPE_H
 #include "glm/glm.hpp"
 #include "Shader.h"
+#include FT_FREETYPE_H
 
-#include <iostream>
-#include <string>
-#include <map>
 
 using namespace SDLFramework;
 
@@ -41,7 +42,7 @@ public: // ACCESSABLE VARIABLE DECLARATIONS
 
 public: // CONSTRUCTORS / DESTRUCTOR / OVERLOADS
 	Font();
-	Font(std::string fontName, Shader& shaderToUse, int pixHeight);
+	Font(std::string fontName, int pixHeight, Shader shader);
 
 public: // GETTERS
 	Vector2 GetFontPosition();

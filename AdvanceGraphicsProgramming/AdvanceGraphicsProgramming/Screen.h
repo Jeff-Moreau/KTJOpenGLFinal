@@ -3,11 +3,13 @@
 
 #include "AudioManager.h"
 #include "GraphicsManager.h"
-#include "InputManager.h"
-#include "Sprite.h"
+#include "Model.h"
+#include "Image.h"
 #include "Font.h"
 #include "glm/glm.hpp"
 #include "GLFW/glfw3.h"
+#include <cmath>
+#include <iostream>
 
 class Screen
 {

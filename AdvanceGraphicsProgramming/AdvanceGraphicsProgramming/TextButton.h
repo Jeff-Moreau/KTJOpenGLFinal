@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "MathHelper.h"
-#include "Sprite.h"
+#include "Image.h"
 #include "Font.h"
 
 using namespace SDLFramework;

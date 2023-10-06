@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Shader.h"
 #include <iostream>
 
 namespace SDLFramework
@@ -13,7 +14,10 @@ namespace SDLFramework
 	public: // ACCESSABLE VARIABLE DECLARATIONS
 		const unsigned int SCREEN_WIDTH = 800;
 		const unsigned int SCREEN_HEIGHT = 600;
-	
+		Shader TextureShader;
+		Shader FontShader;
+		Shader ModelShader;
+
 	private: // MEMBER POINTER VARIABLE DECLARATIONS
 		GLFWwindow* p_GameWindow;
 	
