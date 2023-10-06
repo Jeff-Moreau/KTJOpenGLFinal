@@ -13,8 +13,6 @@
 // PROJECT INCLUDES
 #include "Shader.h"
 
-using namespace std;
-
 #define MAX_BONE_INFLUENCE 4
 
 struct Vertex
@@ -31,16 +29,16 @@ struct Vertex
 struct Texture
 {
     unsigned int ID = 0;
-    string Type;
-    string Path;
+    std::string Type;
+    std::string Path;
 };
 
 class Mesh
 {
 public: // ACCESSABLE VARIABLE DECLARATIONS
-    vector<Vertex> Vertices;
-    vector<unsigned int> Indices;
-    vector<Texture> Textures;
+    std::vector<Vertex> Vertices;
+    std::vector<unsigned int> Indices;
+    std::vector<Texture> Textures;
     unsigned int VAO;
 
 private: // MEMBER VARIABLE DECLARATIONS
@@ -48,7 +46,7 @@ private: // MEMBER VARIABLE DECLARATIONS
     unsigned int _EBO;
 
 public: // CONSTRUCTOR / OVERLOADS / DESTRUCTOR
-    Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
+    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
     ~Mesh();
 
 public: // DOERS

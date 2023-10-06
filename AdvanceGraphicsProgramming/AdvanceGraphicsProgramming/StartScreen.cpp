@@ -43,7 +43,6 @@ void StartScreen::Update()
 	if (buttonstate == GLFW_PRESS && _HoverNewGame)
 	{
 		p_SoundFX->play2D("Assets/Sounds/oh-no.mp3", false);
-		//p_SoundFX->PlaySFX("oh-no.mp3");
 		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Play);
 		std::cout << "Start Game now" << std::endl;
 	}
@@ -51,7 +50,6 @@ void StartScreen::Update()
 	if (_HoverNewGame && _HoverNewGameSound)
 	{
 		p_SoundFX->play2D("Assets/Sounds/droidnoise.mp3", false);
-		//p_SoundFX->PlaySFX("droidnoise.mp3");
 		_HoverNewGameSound = false;
 	}
 	
@@ -64,7 +62,6 @@ void StartScreen::Update()
 void StartScreen::Render()
 {
 	p_BackGroundImage->Render();
-
 	p_NewGame->RenderText("Start New Game", 285, 175, 1, _StartColor);
 	p_ExitGame->RenderText("Exit Game", 575, 25, 1, _ExitColor);
 }

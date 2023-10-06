@@ -28,8 +28,8 @@ using namespace SDLFramework;
 class Model
 {
 public: // ACCESSABLE VARIABLE DECLARATIONS
-    vector<Texture> AllTexturesLoaded;
-    vector<Mesh> Meshes;
+    std::vector<Texture> AllTexturesLoaded;
+    std::vector<Mesh> Meshes;
     std::string Location;
     bool GammaCorrection;
 
@@ -58,7 +58,7 @@ private: // DOERS
     void LoadModel(std::string const &path);
     void ProcessNode(aiNode* node, const aiScene* scene);
     Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
-    vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
-    unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
+    std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+    unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma = false);
 };
 #endif // !MODEL_H

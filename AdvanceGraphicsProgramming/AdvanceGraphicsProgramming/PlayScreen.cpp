@@ -28,7 +28,6 @@ PlayScreen::PlayScreen()
 
 	p_SaberOne = new Model("Assets/Models/3dRedblueSaber.obj");
 	p_SaberTwo = new Model("Assets/Models/3dRedblueSaber.obj");
-	//p_Bullet = new Model("Assets/Models/3dRedblueSaber.obj");
 	p_Gun = new Model("Assets/Models/Gun.obj");
 
 	_TimerReset = true;
@@ -111,7 +110,15 @@ void PlayScreen::Update()
 		_MainMenuColor = glm::vec3(0, 0, 0);
 	}
 
-	if (buttonstate == GLFW_PRESS && !_HoverMainMenu && _CanShoot)
+	if (buttonstate == GLFW_PRESS && _HoverMainMenu)
+	{
+		p_SoundFX->play2D("Assets/Sounds/CursorMovementSFX.mp3", false);
+		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Start);
+		_TimerReset = true;
+		_Time = 0;
+		_NewTime = 0;
+	}
+	else if (buttonstate == GLFW_PRESS && !_HoverMainMenu && _CanShoot)
 	{
 		std::cout << "Im Shooting" << std::endl;
 		p_SoundFX->play2D("Assets/Sounds/beam-8-43831.mp3", false);
@@ -120,15 +127,6 @@ void PlayScreen::Update()
 	if (buttonstate == GLFW_RELEASE)
 	{
 		_CanShoot = true;
-	}
-
-	if (buttonstate == GLFW_PRESS && _HoverMainMenu)
-	{
-		p_SoundFX->play2D("Assets/Sounds/CursorMovementSFX.mp3", false);
-		ScreenManager::Use()->SetCurrentScreen(ScreenManager::Use()->Start);
-		_TimerReset = true;
-		_Time = 0;
-		_NewTime = 0;
 	}
 
 	static int laststate = GLFW_PRESS;
