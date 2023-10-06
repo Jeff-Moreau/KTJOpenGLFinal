@@ -143,6 +143,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="PlayScreen.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PlayScreen.h" />

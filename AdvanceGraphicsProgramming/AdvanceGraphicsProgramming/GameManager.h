@@ -6,6 +6,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Image.h"
+#include "Gun.h"
 
 class GameManager
 {
